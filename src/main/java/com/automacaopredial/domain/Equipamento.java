@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.automacaopredial.domain.enums.TipoEquipamento;
 
@@ -21,7 +23,9 @@ public class Equipamento implements Serializable{
 		private boolean status;
 		private Integer tipo;
 		
-		//private List<Ambiente> ambientes = new ArrayList<>();
+		@ManyToOne
+		@JoinColumn(name = "ambiente_id")
+		private Ambiente ambiente;
 		
 		public Equipamento() {		
 		}
