@@ -3,7 +3,6 @@ package com.automacaopredial.services;
 import java.util.List;
 import java.util.Optional;
 
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.automacaopredial.domain.Ambiente;
 import com.automacaopredial.repositories.AmbienteRepository;
+import com.automacaopredial.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class AmbienteService {

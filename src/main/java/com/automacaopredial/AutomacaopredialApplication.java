@@ -1,8 +1,6 @@
 package com.automacaopredial;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -37,40 +35,26 @@ public class AutomacaopredialApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Equipamento ep1 = new Equipamento(1,"Equipamento 1", 2, true, TipoEquipamento.LAMPADA);
-		Equipamento ep2 = new Equipamento(2,"Equipamento 2", 3, true, TipoEquipamento.RADIO);		
-		
-		List<Equipamento> listaEp1 = new ArrayList<>();
-		listaEp1.add(ep1);
-		
-		List<Equipamento> listaEp2 = new ArrayList<>();
-		listaEp2.add(ep2);
-		
-		equipamentoRepository.saveAll(Arrays.asList(ep1, ep2));
-		
-		Ambiente amb1 = new Ambiente(1, "Garagem", "Entrada 1");
-		Ambiente amb2 = new Ambiente(2, "Area de serviço", "Lavanderia");
-		
-		List<Ambiente> listaAmb1 = new ArrayList<>();
-		listaAmb1.add(amb1);
-		
-		List<Ambiente> listaAmb2 = new ArrayList<>();
-		listaAmb2.add(amb2);
-		
-		amb1.setEquipamento(listaEp1);
-		amb2.setEquipamento(listaEp2);
-		
-		ambienteRepository.saveAll(Arrays.asList(amb1, amb2));
-		
-		Dispositivo disp1 = new Dispositivo(1, "Dispositivo 1", "TESTE", TipoDispositivo.ARDUINO_MEGA_2560);
-		Dispositivo disp2 = new Dispositivo(2, "Dispositivo 2", "TESTE 2", TipoDispositivo.ARDUINO_LALYPAD);
-		
-		disp1.setAmbientes(listaAmb1);
-		disp2.setAmbientes(listaAmb2);
+		Dispositivo disp1 = new Dispositivo(null, "Dispositivo 1", "TESTE", TipoDispositivo.ARDUINO_MEGA_2560);
+		Dispositivo disp2 = new Dispositivo(null, "Dispositivo 2", "TESTE 2", TipoDispositivo.ARDUINO_LALYPAD);
 		
 		dispositivoRepository.saveAll(Arrays.asList(disp1, disp2));
-		
-	}
 
-	
+		Ambiente amb1 = new Ambiente(null, "Garagem", "Entrada 1", disp1);
+		Ambiente amb2 = new Ambiente(null, "Area de serviço", "Lavanderia", disp2);
+				
+		ambienteRepository.saveAll(Arrays.asList(amb1, amb2));
+		
+		disp1.getAmbientes().addAll(Arrays.asList(amb1));
+		disp2.getAmbientes().addAll(Arrays.asList(amb2));
+		
+		Equipamento ep1 = new Equipamento(1,"Equipamento 1", 2, true, TipoEquipamento.LAMPADA, amb1);
+		Equipamento ep2 = new Equipamento(2,"Equipamento 2", 3, true, TipoEquipamento.RADIO, amb2);				
+		
+		equipamentoRepository.saveAll(Arrays.asList(ep1, ep2));
+				
+		amb1.getEquipamentos().addAll(Arrays.asList(ep1));
+		amb2.getEquipamentos().addAll(Arrays.asList(ep2));
+		
+	}	
 }

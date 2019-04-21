@@ -12,8 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.automacaopredial.domain.Equipamento;
 import com.automacaopredial.repositories.EquipamentoRepository;
-
-import javassist.tools.rmi.ObjectNotFoundException;
+import com.automacaopredial.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class EquipamentoService {
@@ -21,7 +20,7 @@ public class EquipamentoService {
 	@Autowired //será instancia automaticamente pelo spring pela injecao de depencia ou inversao de controle
 	public EquipamentoRepository repo;
 
-	public Equipamento find(Integer id) throws ObjectNotFoundException {
+	public Equipamento find(Integer id) {
 		Optional<Equipamento> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Equipamento.class.getName(), null));

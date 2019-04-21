@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Ambiente implements Serializable{	
@@ -23,21 +24,23 @@ public class Ambiente implements Serializable{
 	private String nome;
 	private String descricao;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "ambiente")
+	private List<Equipamento> equipamentos = new ArrayList<>();
+	
 	@ManyToOne
 	@JoinColumn(name = "dispositivo_id")
-	private Dispositivo dispositivo;
-	
-	@OneToMany(mappedBy = "ambiente", cascade = CascadeType.ALL)
-	private List<Equipamento> equipamentos = new ArrayList<>();
+	private Dispositivo dispositivo;	
 	
 	public Ambiente() {
 	}
 	
-	public Ambiente(Integer id, String nome, String descricao) {
+	public Ambiente(Integer id, String nome, String descricao, Dispositivo dispositivo) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
+		this.dispositivo = dispositivo;
 	}
 
 	public Integer getId() {

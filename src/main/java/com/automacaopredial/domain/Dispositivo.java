@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.automacaopredial.domain.enums.TipoDispositivo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Dispositivo implements Serializable{	
@@ -24,7 +24,8 @@ public class Dispositivo implements Serializable{
 	private String descricao;
 	private Integer tipo;
 	
-	@OneToMany(mappedBy = "dispositivo", cascade = CascadeType.ALL)
+	@JsonIgnore
+	@OneToMany(mappedBy = "dispositivo")
 	private List<Ambiente> ambientes = new ArrayList<>(); 
 
 	public Dispositivo() {		
