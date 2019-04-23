@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.automacaopredial.domain.enums.TipoEquipamento;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Equipamento implements Serializable{	
@@ -23,6 +24,7 @@ public class Equipamento implements Serializable{
 	private boolean status;
 	private Integer tipo;
 		
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "ambiente_id")
 	private Ambiente ambiente;

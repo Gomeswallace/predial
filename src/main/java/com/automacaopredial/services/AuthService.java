@@ -18,8 +18,8 @@ public class AuthService {
 //	@Autowired
 //	private BCryptPasswordEncoder pe;
 	
-	@Autowired
-	private EmailService emailService;
+//	@Autowired
+//	private EmailService emailService;
 	
 	private Random rand = new Random();
 	
