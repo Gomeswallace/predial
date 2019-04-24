@@ -79,14 +79,15 @@ public class EquipamentoResource {
 	}
 	
 	@RequestMapping(value="/page", method=RequestMethod.GET)
-	public ResponseEntity<Page<Equipamento>> findPage(
+	public ResponseEntity<Page<EquipamentoDTO>> findPage(
+			//requestParam informa que o parametro é opcional
 			 @RequestParam(value="page", defaultValue="0")  Integer page, 
-			 @RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
+			 @RequestParam(value="linesPerPage", defaultValue="4") Integer linesPerPage, 
 			 @RequestParam(value="orderBy", defaultValue="nome") String orderBy, 
 			 @RequestParam(value="direction", defaultValue="ASC") String direction){
 		Page<Equipamento> list = service.findPage(page, linesPerPage, orderBy, direction);
 		//lista de dto para o stream converter cada obj em dto pela funcao anonima e depois retornar essa lista
-		//Page<EquipamentoDTO> listDTO = list.map(obj -> new EquipamentoDTO(obj));
-		return ResponseEntity.ok().body(list);
+		Page<EquipamentoDTO> listDTO = list.map(obj -> new EquipamentoDTO(obj));
+		return ResponseEntity.ok().body(listDTO);
 	}
 }
