@@ -12,8 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Ambiente implements Serializable{	
@@ -24,14 +23,11 @@ public class Ambiente implements Serializable{
 	private Integer id;
 	private String nome;
 	private String descricao;
-	
-	//jsonmanagedreference informa que o ambiente pode serializar equipamentos
-	@JsonManagedReference
+
 	@OneToMany(mappedBy = "ambiente")
 	private List<Equipamento> equipamentos = new ArrayList<>();
 	
-	//jsonbackreference informa que a serializacao foi feita no outro obj
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "dispositivo_id")
 	private Dispositivo dispositivo;	

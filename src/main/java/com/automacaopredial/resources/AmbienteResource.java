@@ -2,6 +2,7 @@ package com.automacaopredial.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.automacaopredial.domain.Ambiente;
+import com.automacaopredial.dto.AmbienteDTO;
 import com.automacaopredial.services.AmbienteService;
 
 @RestController
@@ -60,11 +62,12 @@ public class AmbienteResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<Ambiente>> findAll() {
+	public ResponseEntity<List<AmbienteDTO>> findAll() {
 		List<Ambiente> list = service.findAll();
-		//List<Ambiente> listDTO = list.stream().map(obj -> new Ambiente(obj)).collect(Collectors.toList());
+		List<AmbienteDTO> listDTO = list.stream()
+									.map(obj -> new AmbienteDTO(obj)).collect(Collectors.toList());
 				
-		return ResponseEntity.ok(list);
+		return ResponseEntity.ok().body(listDTO);
 	}
 	
 	@RequestMapping(value="/page", method=RequestMethod.GET)

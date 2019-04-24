@@ -10,10 +10,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.automacaopredial.domain.enums.TipoEquipamento;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Equipamento implements Serializable{	
+public class Equipamento implements Serializable {	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -24,7 +24,7 @@ public class Equipamento implements Serializable{
 	private boolean status;
 	private Integer tipo;
 		
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "ambiente_id")
 	private Ambiente ambiente;
@@ -33,7 +33,6 @@ public class Equipamento implements Serializable{
 	}
 
 	public Equipamento(Integer id, String nome, Integer porta, boolean status, TipoEquipamento tipoEquipamento, Ambiente ambiente) {
-		super();
 		this.id = id;
 		this.nome = nome;
 		this.porta = porta;
@@ -65,14 +64,6 @@ public class Equipamento implements Serializable{
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
-
-	//public List<Ambiente> getAmbientes() {
-	//	return ambientes;
-	//}
-
-	//public void setAmbientes(List<Ambiente> ambientes) {
-	//	this.ambientes = ambientes;
-	//}
 	
 	public TipoEquipamento getTipo() {
 		return TipoEquipamento.toEnum(tipo);

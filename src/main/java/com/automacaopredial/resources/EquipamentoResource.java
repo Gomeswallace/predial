@@ -2,6 +2,7 @@ package com.automacaopredial.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.automacaopredial.domain.Equipamento;
+import com.automacaopredial.dto.EquipamentoDTO;
 import com.automacaopredial.services.EquipamentoService;
 
 import javassist.tools.rmi.ObjectNotFoundException;
@@ -68,12 +70,12 @@ public class EquipamentoResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<Equipamento>> findAll(){
+	public ResponseEntity<List<EquipamentoDTO>> findAll(){
 		List<Equipamento> list = service.findAll();
 		//lista de dto para o stream converter cada obj em dto pela funcao anonima e depois retornar essa lista
-		//List<EquipamentoDTO> listDTO = list.stream().map(obj -> new EquipamentoDTO(obj))
-//											.collect(Collectors.toList());
-		return ResponseEntity.ok().body(list);
+		List<EquipamentoDTO> listDTO = list.stream().map(obj -> new EquipamentoDTO(obj))
+											.collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDTO);
 	}
 	
 	@RequestMapping(value="/page", method=RequestMethod.GET)

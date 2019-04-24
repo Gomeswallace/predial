@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.automacaopredial.domain.Equipamento;
 import com.automacaopredial.repositories.EquipamentoRepository;
+import com.automacaopredial.services.exceptions.DataIntegrityException;
 import com.automacaopredial.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -38,12 +38,12 @@ public class EquipamentoService {
 		return repo.save(newObj);
 	}
 	
-	public void delete(Integer id) throws ObjectNotFoundException {
+	public void delete(Integer id) {
 		find(id);
 		try {
 			repo.deleteById(id);;
-		} catch (DataIntegrityViolationException e) {
-			//throw new DataIntegrityException("Não é possível um equipamento que possui ambiente");
+		} catch (DataIntegrityException e) {
+			throw new DataIntegrityException("Não é possível um equipamento que possui ambiente");
 		}
 	}
 	

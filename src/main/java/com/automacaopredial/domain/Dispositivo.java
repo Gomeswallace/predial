@@ -11,8 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.automacaopredial.domain.enums.TipoDispositivo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Dispositivo implements Serializable{	
@@ -25,8 +23,6 @@ public class Dispositivo implements Serializable{
 	private String descricao;
 	private Integer tipo;
 	
-	@JsonManagedReference
-	@JsonIgnore
 	@OneToMany(mappedBy = "dispositivo")
 	private List<Ambiente> ambientes = new ArrayList<>(); 
 

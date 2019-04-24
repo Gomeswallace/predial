@@ -2,14 +2,16 @@ package com.automacaopredial.services;
 
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+
 import com.automacaopredial.domain.Dispositivo;
 import com.automacaopredial.repositories.DispositivoRepository;
+import com.automacaopredial.services.exceptions.DataIntegrityException;
 import com.automacaopredial.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -42,8 +44,8 @@ public class DispositivoService {
 		find(id);
 		try {			
 			repo.deleteById(id);			
-		} catch (DataIntegrityViolationException ex) {
-			throw new DataIntegrityViolationException("Não é possível excluir um Dispositivo que possui Recursos!");
+		} catch (DataIntegrityException ex) {
+			throw new DataIntegrityException("Não é possível excluir um Dispositivo que possui Recursos!");
 		}
 	}
 	

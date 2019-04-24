@@ -33,9 +33,9 @@ public class Usuario implements Serializable{
 	private String senha;
 	private Integer tipo;
 	
-	@ElementCollection
-	@CollectionTable(name="TELEFONE")
-	private Set<String> telefones = new HashSet<>();
+	//@ElementCollection
+	//@CollectionTable(name="TELEFONE")
+	//private Set<String> telefones = new HashSet<>();
 
 	//FetchType.EAGER para buscar junto com o usuario o tipo dele
 	@ElementCollection(fetch=FetchType.EAGER)
@@ -87,15 +87,7 @@ public class Usuario implements Serializable{
 	public void setTipo(TipoUsuario tipo) {
 		this.tipo = tipo.getCod();
 	}
-	
-	public Set<String> getTelefones() {
-		return telefones;
-	}
-
-	public void setTelefones(Set<String> telefones) {
-		this.telefones = telefones;
-	}
-
+		
 	public String getSenha() {
 		return senha;
 	}

@@ -1,6 +1,5 @@
 package com.automacaopredial.services;
 
-
 public class UserService {
 /*	
 	public static UserSS authenticated() {

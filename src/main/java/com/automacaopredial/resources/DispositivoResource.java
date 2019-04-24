@@ -2,6 +2,7 @@ package com.automacaopredial.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.automacaopredial.domain.Dispositivo;
+import com.automacaopredial.dto.DispositivoDTO;
 import com.automacaopredial.services.DispositivoService;
 
 @RestController
@@ -61,11 +63,11 @@ public class DispositivoResource {
 	
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<Dispositivo>> findAll() {
+	public ResponseEntity<List<DispositivoDTO>> findAll() {
 		List<Dispositivo> list = service.findAll();
-		//List<DispositivoDTO> listDTO = list.stream().map(obj -> new DispositivoDTO(obj)).collect(Collectors.toList());
-				
-		return ResponseEntity.ok().body(list);
+		List<DispositivoDTO> listDTO = list.stream()
+											.map(obj -> new DispositivoDTO(obj)).collect(Collectors.toList());				
+		return ResponseEntity.ok().body(listDTO);
 	}
 	
 	@RequestMapping(value="/page", method=RequestMethod.GET)
