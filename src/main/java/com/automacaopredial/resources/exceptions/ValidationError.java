@@ -13,6 +13,7 @@ public class ValidationError extends StandardError {
 		super(timestamp, status, error, message, path);
 	}
 
+	//alterado o nome do metodo pq no java o q importa é o nome do metodo get
 	public List<FieldMessage> getErrors(){
 		return errors;
 	}

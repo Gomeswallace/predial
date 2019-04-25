@@ -10,9 +10,10 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.automacaopredial.domain.Ambiente;
+import com.automacaopredial.dto.AmbienteDTO;
 import com.automacaopredial.repositories.AmbienteRepository;
-import com.automacaopredial.services.exceptions.ObjectNotFoundException;
 import com.automacaopredial.services.exceptions.DataIntegrityException;
+import com.automacaopredial.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class AmbienteService {
@@ -56,9 +57,9 @@ public class AmbienteService {
 		return repo.findAll(pageRequest);
 	}
 	
-	//public Ambiente fromDTO(AmbienteDTO objDTO) {
-	//		return new Ambiente(objDTO.getId(), objDTO.getNome(), objDTO.getDescricao());
-	//}
+	public Ambiente fromDTO(AmbienteDTO objDTO) {
+			return new Ambiente(objDTO.getId(), objDTO.getNome(), objDTO.getDescricao(), objDTO.getDispositivo());
+	}
 	
 	private void updateData(Ambiente newObj, Ambiente obj) {
 		newObj.setNome(obj.getNome());

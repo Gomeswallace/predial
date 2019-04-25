@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +37,8 @@ public class AmbienteResource {
 	
 	//@PreAuthorize("hasAnyRole('ADMINISTRADOR')")
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Ambiente obj){ //converte o obj em json
+	public ResponseEntity<Void> insert(@Valid @RequestBody AmbienteDTO objDTO){ //converte o obj em json
+		Ambiente obj = service.fromDTO(objDTO); 
 		obj = service.insert(obj);
 		//pega o id do novo recurso criado e add na url
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -47,7 +50,8 @@ public class AmbienteResource {
 	
 	//@PreAuthorize("hasAnyRole('ADMINISTRADOR')")
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody Ambiente obj, @PathVariable Integer id){
+	public ResponseEntity<Void> update(@Valid @RequestBody AmbienteDTO objDTO, @PathVariable Integer id){
+		Ambiente obj = service.fromDTO(objDTO);
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
@@ -55,9 +59,8 @@ public class AmbienteResource {
 	
 	//@PreAuthorize("hasAnyRole('ADMINISTRADOR')")
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public ResponseEntity<Void> delete(@PathVariable Integer id) {
-		service.delete(id);
-		
+	public ResponseEntity<Void> delete(@Valid @PathVariable Integer id) {
+		service.delete(id);		
 		return ResponseEntity.noContent().build();					
 	}
 	

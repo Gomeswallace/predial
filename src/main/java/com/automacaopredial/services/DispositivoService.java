@@ -10,6 +10,8 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.automacaopredial.domain.Dispositivo;
+import com.automacaopredial.domain.enums.TipoDispositivo;
+import com.automacaopredial.dto.DispositivoDTO;
 import com.automacaopredial.repositories.DispositivoRepository;
 import com.automacaopredial.services.exceptions.DataIntegrityException;
 import com.automacaopredial.services.exceptions.ObjectNotFoundException;
@@ -63,9 +65,9 @@ public class DispositivoService {
 	//	emailService.sendOrderConfirmationEmail(obj);;
 	//}
 	
-	//public Dispositivo fromDTO(DispositivoDTO objDTO) {
-	//		return new Dispositivo(objDTO.getId(), objDTO.getNome(), objDTO.getDescricao(), null);
-	//}
+	public Dispositivo fromDTO(DispositivoDTO objDTO) {
+			return new Dispositivo(objDTO.getId(), objDTO.getNome(), objDTO.getDescricao(), TipoDispositivo.toEnum(objDTO.getId()));
+	}
 	
 	private void updateData(Dispositivo newObj, Dispositivo obj) {
 		newObj.setNome(obj.getNome());

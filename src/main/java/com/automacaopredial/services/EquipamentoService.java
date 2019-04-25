@@ -10,6 +10,8 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.automacaopredial.domain.Equipamento;
+import com.automacaopredial.domain.enums.TipoEquipamento;
+import com.automacaopredial.dto.EquipamentoDTO;
 import com.automacaopredial.repositories.EquipamentoRepository;
 import com.automacaopredial.services.exceptions.DataIntegrityException;
 import com.automacaopredial.services.exceptions.ObjectNotFoundException;
@@ -57,9 +59,9 @@ public class EquipamentoService {
 		return repo.findAll(pageRequest);
 	}
 	
-	//public Equipamento fromDTO(EquipamentoDTO objDTO) {
-	//		return new Equipamento(objDTO.getId(), objDTO.getNome(), objDTO.getPorta(), objDTO.isStatus(), objDTO.getTipo());
-	//}
+	public Equipamento fromDTO(EquipamentoDTO objDTO) {
+			return new Equipamento(objDTO.getId(), objDTO.getNome(), objDTO.getPorta(), objDTO.isStatus(), TipoEquipamento.toEnum(objDTO.getTipo()),objDTO.getAmbiente());
+	}
 	
 	private void updateData(Equipamento newObj, Equipamento obj) {
 		newObj.setNome(obj.getNome());

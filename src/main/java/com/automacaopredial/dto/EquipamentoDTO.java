@@ -2,17 +2,28 @@ package com.automacaopredial.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
+import com.automacaopredial.domain.Ambiente;
 import com.automacaopredial.domain.Equipamento;
-import com.automacaopredial.domain.enums.TipoEquipamento;
 
 public class EquipamentoDTO implements Serializable{	
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
+	@NotEmpty(message="Preenchimento obrigatório.")
+	@Length(min=5, message="O tamanho deve ser mínimo de 5 caracteres.")
 	private String nome;
+	@NotEmpty(message="Preenchimento obrigatório.")
 	private Integer porta;
+	@NotEmpty(message="Preenchimento obrigatório.")
 	private boolean status;
-	private TipoEquipamento tipo;
+	@NotEmpty(message="Preenchimento obrigatório.")
+	private Integer tipo;
+	@NotEmpty(message="Preenchimento obrigatório.")
+	private Ambiente ambiente;
 	
 	public EquipamentoDTO() {
 		
@@ -24,6 +35,7 @@ public class EquipamentoDTO implements Serializable{
 		porta = obj.getPorta();
 		status = obj.isStatus();
 		tipo = obj.getTipo();
+		ambiente = obj.getAmbiente();
 	}
 
 	public Integer getId() {
@@ -58,11 +70,19 @@ public class EquipamentoDTO implements Serializable{
 		this.status = status;
 	}
 
-	public TipoEquipamento getTipo() {
+	public Integer getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(TipoEquipamento tipo) {
+	public void setTipo(Integer tipo) {
 		this.tipo = tipo;
 	}
+
+	public Ambiente getAmbiente() {
+		return ambiente;
+	}
+
+	public void setAmbiente(Ambiente ambiente) {
+		this.ambiente = ambiente;
+	}	
 }

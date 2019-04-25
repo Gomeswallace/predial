@@ -65,8 +65,8 @@ public class Equipamento implements Serializable {
 		this.status = status;
 	}
 	
-	public TipoEquipamento getTipo() {
-		return TipoEquipamento.toEnum(tipo);
+	public Integer getTipo() {
+		return tipo;
 	}
 
 	public void setTipo(TipoEquipamento tipo) {
@@ -79,6 +79,14 @@ public class Equipamento implements Serializable {
 
 	public void setPorta(Integer porta) {
 		this.porta = porta;
+	}	
+
+	public Ambiente getAmbiente() {
+		return ambiente;
+	}
+
+	public void setAmbiente(Ambiente ambiente) {
+		this.ambiente = ambiente;
 	}
 
 	//hashCode e Equals para comparar o objeto pelo conteudo e nao pela referencia

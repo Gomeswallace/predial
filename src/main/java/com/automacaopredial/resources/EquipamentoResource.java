@@ -39,8 +39,8 @@ public class EquipamentoResource {
 	//@PreAuthorize("hasAnyRole('ADMIN')")
 	//mapear o metodo no endpoin equipamentos como POST 
 	@RequestMapping(method = RequestMethod.POST) //@RequestBody permite que o obj seja construido a partir do json enviado 	
-	public ResponseEntity<Void> insert(@Valid @RequestBody Equipamento obj){
-		//Equipamento obj = service.fromDTO(objDTO);
+	public ResponseEntity<Void> insert(@Valid @RequestBody EquipamentoDTO objDTO){
+		Equipamento obj = service.fromDTO(objDTO);
 				
 		//ver http status code
 		obj = service.insert(obj); 
@@ -54,8 +54,8 @@ public class EquipamentoResource {
 	
 	//@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value= "/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> Update(@RequestBody Equipamento obj, @PathVariable Integer id) throws ObjectNotFoundException{
-		//Equipamento obj = service.fromDTO(objDto);		
+	public ResponseEntity<Void> Update(@Valid @RequestBody EquipamentoDTO objDTO, @PathVariable Integer id) throws ObjectNotFoundException{
+		Equipamento obj = service.fromDTO(objDTO);
 		obj.setId(id);
 		obj = service.update(obj);
 		//noContent conteudo vazio
@@ -64,7 +64,7 @@ public class EquipamentoResource {
 	
 	//@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public ResponseEntity<Void> delete(@PathVariable Integer id) throws ObjectNotFoundException{
+	public ResponseEntity<Void> delete(@Valid @PathVariable Integer id) throws ObjectNotFoundException{
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
