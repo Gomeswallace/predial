@@ -43,7 +43,7 @@ public class AmbienteService {
 		try {			
 			repo.deleteById(id);			
 		} catch (DataIntegrityException ex) {
-			throw new DataIntegrityException("Não é possível excluir um Ambiente que possui Recursos!");
+			throw new DataIntegrityException("Não é possível excluir um Ambiente que possui Equipamentos!");
 		}
 	}
 	
@@ -58,11 +58,12 @@ public class AmbienteService {
 	}
 	
 	public Ambiente fromDTO(AmbienteDTO objDTO) {
-			return new Ambiente(objDTO.getId(), objDTO.getNome(), objDTO.getDescricao(), objDTO.getDispositivo());
+			return new Ambiente(objDTO.getId(), objDTO.getNome(), objDTO.getDescricao(), null);
 	}
 	
 	private void updateData(Ambiente newObj, Ambiente obj) {
 		newObj.setNome(obj.getNome());
 		newObj.setDescricao(obj.getDescricao());
+		newObj.setEquipamento(obj.getEquipamentos());
 	}
 }

@@ -10,7 +10,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.automacaopredial.domain.Dispositivo;
-import com.automacaopredial.domain.enums.TipoDispositivo;
 import com.automacaopredial.dto.DispositivoDTO;
 import com.automacaopredial.repositories.DispositivoRepository;
 import com.automacaopredial.services.exceptions.DataIntegrityException;
@@ -47,7 +46,7 @@ public class DispositivoService {
 		try {			
 			repo.deleteById(id);			
 		} catch (DataIntegrityException ex) {
-			throw new DataIntegrityException("Não é possível excluir um Dispositivo que possui Recursos!");
+			throw new DataIntegrityException("Não é possível excluir um Dispositivo que possui Ambientes!");
 		}
 	}
 	
@@ -66,7 +65,7 @@ public class DispositivoService {
 	//}
 	
 	public Dispositivo fromDTO(DispositivoDTO objDTO) {
-			return new Dispositivo(objDTO.getId(), objDTO.getNome(), objDTO.getDescricao(), TipoDispositivo.toEnum(objDTO.getId()));
+			return new Dispositivo(objDTO.getId(), objDTO.getNome(), objDTO.getDescricao(), null);
 	}
 	
 	private void updateData(Dispositivo newObj, Dispositivo obj) {

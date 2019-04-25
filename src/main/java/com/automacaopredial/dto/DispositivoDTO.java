@@ -16,9 +16,7 @@ public class DispositivoDTO implements Serializable{
 	@Length(min=5, message="O tamanho deve ser mínimo de 5 caracteres.")
 	private String nome;
 	private String descricao;
-	@NotEmpty(message="Preenchimento obrigatório.")
-	private Integer tipo;
-
+	
 	public DispositivoDTO() {
 		
 	}
@@ -27,7 +25,6 @@ public class DispositivoDTO implements Serializable{
 		id = obj.getId();
 		nome = obj.getNome();
 		descricao = obj.getDescricao();
-		tipo = obj.getTipo();
 	}
 
 	public Integer getId() {
@@ -53,12 +50,4 @@ public class DispositivoDTO implements Serializable{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
-	public Integer getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(Integer tipo) {
-		this.tipo = tipo;
-	}	
 }

@@ -45,7 +45,7 @@ public class EquipamentoService {
 		try {
 			repo.deleteById(id);;
 		} catch (DataIntegrityException e) {
-			throw new DataIntegrityException("Não é possível um equipamento que possui ambiente");
+			throw new DataIntegrityException("Erro ao excluir o equipamento com o id: " + id);
 		}
 	}
 	
@@ -60,7 +60,7 @@ public class EquipamentoService {
 	}
 	
 	public Equipamento fromDTO(EquipamentoDTO objDTO) {
-			return new Equipamento(objDTO.getId(), objDTO.getNome(), objDTO.getPorta(), objDTO.isStatus(), TipoEquipamento.toEnum(objDTO.getTipo()),objDTO.getAmbiente());
+			return new Equipamento(objDTO.getId(), objDTO.getNome(), objDTO.getPorta(), objDTO.isStatus(), TipoEquipamento.toEnum(objDTO.getTipo()),null);
 	}
 	
 	private void updateData(Equipamento newObj, Equipamento obj) {
