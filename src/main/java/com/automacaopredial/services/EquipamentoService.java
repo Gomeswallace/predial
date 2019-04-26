@@ -9,9 +9,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.automacaopredial.domain.Ambiente;
 import com.automacaopredial.domain.Equipamento;
 import com.automacaopredial.domain.enums.TipoEquipamento;
 import com.automacaopredial.dto.EquipamentoDTO;
+import com.automacaopredial.dto.EquipamentoNewDTO;
 import com.automacaopredial.repositories.EquipamentoRepository;
 import com.automacaopredial.services.exceptions.DataIntegrityException;
 import com.automacaopredial.services.exceptions.ObjectNotFoundException;
@@ -34,7 +36,7 @@ public class EquipamentoService {
 		return repo.save(obj);
 	}
 	
-	public Equipamento update(Equipamento obj) throws ObjectNotFoundException {
+	public Equipamento update(Equipamento obj) {
 		Equipamento newObj = find(obj.getId()); //verifica se o obj existe antes de tentar atualizar
 		updateData(newObj, obj); //Criado o metodo para tratar quais os dados podem ser atualizados
 		return repo.save(newObj);
@@ -63,9 +65,17 @@ public class EquipamentoService {
 			return new Equipamento(objDTO.getId(), objDTO.getNome(), objDTO.getPorta(), objDTO.isStatus(), TipoEquipamento.toEnum(objDTO.getTipo()),null);
 	}
 	
+	public Equipamento fromDTO(EquipamentoNewDTO objNewDTO) {
+		Ambiente amb = new Ambiente(objNewDTO.getAmbienteId(), null, null, null);
+		Equipamento equip = new Equipamento(null, objNewDTO.getNome(), objNewDTO.getPorta(),
+					objNewDTO.isStatus(), TipoEquipamento.toEnum(objNewDTO.getTipo()), amb);
+		return equip;
+	}
+	
 	private void updateData(Equipamento newObj, Equipamento obj) {
 		newObj.setNome(obj.getNome());
 		newObj.setPorta(obj.getPorta());
 		newObj.setStatus(obj.isStatus());
+		newObj.setTipo(TipoEquipamento.toEnum(obj.getTipo()));
 	}
 }

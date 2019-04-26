@@ -19,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.automacaopredial.domain.Ambiente;
 import com.automacaopredial.dto.AmbienteDTO;
+import com.automacaopredial.dto.AmbienteNewDTO;
 import com.automacaopredial.services.AmbienteService;
 
 @RestController
@@ -37,8 +38,8 @@ public class AmbienteResource {
 	
 	//@PreAuthorize("hasAnyRole('ADMINISTRADOR')")
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody AmbienteDTO objDTO){ //converte o obj em json
-		Ambiente obj = service.fromDTO(objDTO); 
+	public ResponseEntity<Void> insert(@Valid @RequestBody AmbienteNewDTO objNewDTO){ //converte o obj em json
+		Ambiente obj = service.fromDTO(objNewDTO); 
 		obj = service.insert(obj);
 		//pega o id do novo recurso criado e add na url
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -59,7 +60,7 @@ public class AmbienteResource {
 	
 	//@PreAuthorize("hasAnyRole('ADMINISTRADOR')")
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public ResponseEntity<Void> delete(@Valid @PathVariable Integer id) {
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);		
 		return ResponseEntity.noContent().build();					
 	}

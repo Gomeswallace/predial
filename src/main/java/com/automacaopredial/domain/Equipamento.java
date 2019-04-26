@@ -37,7 +37,7 @@ public class Equipamento implements Serializable {
 		this.nome = nome;
 		this.porta = porta;
 		this.status = status;
-		this.tipo = tipoEquipamento.getCod();
+		this.tipo = (tipoEquipamento == null) ? null : tipoEquipamento.getCod();
 		this.ambiente = ambiente;
 	}
 		

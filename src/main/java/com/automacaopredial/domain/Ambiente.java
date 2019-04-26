@@ -40,7 +40,7 @@ public class Ambiente implements Serializable{
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
-		this.dispositivo = dispositivo;
+		this.dispositivo = (dispositivo == null) ? null : dispositivo;
 	}
 
 	public Integer getId() {

@@ -8,9 +8,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.automacaopredial.domain.Ambiente;
 import com.automacaopredial.domain.Dispositivo;
+import com.automacaopredial.domain.enums.TipoDispositivo;
 import com.automacaopredial.dto.DispositivoDTO;
+import com.automacaopredial.dto.DispositivoNewDTO;
+import com.automacaopredial.repositories.AmbienteRepository;
 import com.automacaopredial.repositories.DispositivoRepository;
 import com.automacaopredial.services.exceptions.DataIntegrityException;
 import com.automacaopredial.services.exceptions.ObjectNotFoundException;
@@ -21,6 +26,9 @@ public class DispositivoService {
 	@Autowired
 	private DispositivoRepository repo;
 	
+	@Autowired
+	private AmbienteRepository ambienteRepository;
+	
 	//@Autowired
 	//private EmailService emailService; 
 	
@@ -30,9 +38,12 @@ public class DispositivoService {
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Dispositivo.class.getName(), null));
 	}	
 	
+	@Transactional
 	public Dispositivo insert(Dispositivo obj) {
 		obj.setId(null); //id null para garantir a insercao		
-		return repo.save(obj); //utiliza os metodos do spring data		
+		repo.save(obj); //utiliza os metodos do spring data
+		ambienteRepository.saveAll(obj.getAmbientes());
+		return obj;
 	}
 	
 	public Dispositivo update(Dispositivo obj) {
@@ -66,6 +77,14 @@ public class DispositivoService {
 	
 	public Dispositivo fromDTO(DispositivoDTO objDTO) {
 			return new Dispositivo(objDTO.getId(), objDTO.getNome(), objDTO.getDescricao(), null);
+	}
+	
+	public Dispositivo fromDTO(DispositivoNewDTO objnewDTO) {
+		Dispositivo disp = new Dispositivo(null, objnewDTO.getNome(), objnewDTO.getDescricao(), 
+											TipoDispositivo.toEnum(objnewDTO.getTipo()));
+		Ambiente amb = new Ambiente(null, objnewDTO.getAmbienteNome(), objnewDTO.getAmbienteDescricao(), disp);
+		disp.getAmbientes().add(amb);
+		return disp;
 	}
 	
 	private void updateData(Dispositivo newObj, Dispositivo obj) {

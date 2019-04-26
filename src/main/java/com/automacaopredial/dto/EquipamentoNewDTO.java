@@ -7,40 +7,23 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.automacaopredial.domain.Equipamento;
-
-public class EquipamentoDTO implements Serializable{	
+public class EquipamentoNewDTO  implements Serializable {	
 	private static final long serialVersionUID = 1L;
-
-	private Integer id;
-	@NotEmpty(message="Preenchimento obrigatório.")
-	@Length(min=5, message="O tamanho deve ser mínimo de 5 caracteres.")
-	private String nome;
-	@NotNull(message="Preenchimento obrigatório.")
-	private Integer porta;
-	@NotNull(message="Preenchimento obrigatório.")
-	private boolean status;
-	@NotNull(message="Preenchimento obrigatório.")
-	private Integer tipo;
 	
-	public EquipamentoDTO() {
+	@NotEmpty(message="Preenchimento obrigatório")
+	@Length(min=5, max=120, message="O tamanho deve ser entre 5 e 120 caracteres")
+	private String nome;
+	@NotNull(message="Preenchimento obrigatório")
+	private Integer porta;
+	@NotNull(message="Preenchimento obrigatório")
+	private boolean status;
+	@NotNull(message="Preenchimento obrigatório")
+	private Integer tipo;
+	@NotNull(message="Preenchimento obrigatório")	
+	private Integer ambienteId;
+	
+	public EquipamentoNewDTO() {
 		
-	}
-
-	public EquipamentoDTO(Equipamento obj) {
-		id = obj.getId();
-		nome = obj.getNome();
-		porta = obj.getPorta();
-		status = obj.isStatus();
-		tipo = obj.getTipo();
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getNome() {
@@ -74,4 +57,13 @@ public class EquipamentoDTO implements Serializable{
 	public void setTipo(Integer tipo) {
 		this.tipo = tipo;
 	}
+
+	public Integer getAmbienteId() {
+		return ambienteId;
+	}
+
+	public void setAmbienteId(Integer ambienteId) {
+		this.ambienteId = ambienteId;
+	}
 }
+

@@ -19,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.automacaopredial.domain.Dispositivo;
 import com.automacaopredial.dto.DispositivoDTO;
+import com.automacaopredial.dto.DispositivoNewDTO;
 import com.automacaopredial.services.DispositivoService;
 
 @RestController
@@ -29,16 +30,15 @@ public class DispositivoResource {
 	private DispositivoService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<Dispositivo> find(@PathVariable Integer id) {
-		
+	public ResponseEntity<Dispositivo> find(@PathVariable Integer id) {	
 		Dispositivo obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
 //	@PreAuthorize("hasAnyRole('ADMINISTRADOR')")
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody DispositivoDTO objDTO){ //converte o obj em json
-		Dispositivo obj = service.fromDTO(objDTO);
+	public ResponseEntity<Void> insert(@Valid @RequestBody DispositivoNewDTO objnewDTO){ //converte o obj em json
+		Dispositivo obj = service.fromDTO(objnewDTO);
 		obj = service.insert(obj);
 		//pega o id do novo recurso criado e add na url
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -59,7 +59,7 @@ public class DispositivoResource {
 	
 	//@PreAuthorize("hasAnyRole('ADMINISTRADOR')")
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public ResponseEntity<Void> delete(@Valid @PathVariable Integer id) {
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
 		
 		return ResponseEntity.noContent().build();					

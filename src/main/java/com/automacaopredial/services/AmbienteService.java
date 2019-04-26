@@ -8,10 +8,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.automacaopredial.domain.Ambiente;
+import com.automacaopredial.domain.Dispositivo;
+import com.automacaopredial.domain.Equipamento;
+import com.automacaopredial.domain.enums.TipoEquipamento;
 import com.automacaopredial.dto.AmbienteDTO;
+import com.automacaopredial.dto.AmbienteNewDTO;
 import com.automacaopredial.repositories.AmbienteRepository;
+import com.automacaopredial.repositories.EquipamentoRepository;
 import com.automacaopredial.services.exceptions.DataIntegrityException;
 import com.automacaopredial.services.exceptions.ObjectNotFoundException;
 
@@ -21,15 +27,21 @@ public class AmbienteService {
 	@Autowired
 	public AmbienteRepository repo;
 	
+	@Autowired
+	public EquipamentoRepository equipamentoRepository;
+	
 	public Ambiente find(Integer id) {
 		Optional<Ambiente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Ambiente.class.getName(), null));
 	}
 	
+	@Transactional
 	public Ambiente insert(Ambiente obj) {
-		obj.setId(null); //id null para garantir a insercao		
-		return repo.save(obj);		
+		obj.setId(null); //id null para garantir a insercao
+		repo.save(obj);
+		equipamentoRepository.saveAll(obj.getEquipamentos());
+		return obj; 		
 	}
 	
 	public Ambiente update(Ambiente obj) {
@@ -59,6 +71,15 @@ public class AmbienteService {
 	
 	public Ambiente fromDTO(AmbienteDTO objDTO) {
 			return new Ambiente(objDTO.getId(), objDTO.getNome(), objDTO.getDescricao(), null);
+	}
+	
+	public Ambiente fromDTO(AmbienteNewDTO objNewDTO) {
+		Dispositivo disp = new Dispositivo(objNewDTO.getDispositivoId(), null, null, null);
+		Ambiente amb = new Ambiente(null, objNewDTO.getNome(), objNewDTO.getDescricao(), disp);
+		Equipamento equip = new Equipamento(null, objNewDTO.getEquipamentoNome(), objNewDTO.getEquipamentoPorta(),
+				objNewDTO.isEquipamentoStatus(), TipoEquipamento.toEnum(objNewDTO.getEquipamentoTipo()), amb);
+		amb.getEquipamentos().add(equip);
+		return amb;
 	}
 	
 	private void updateData(Ambiente newObj, Ambiente obj) {

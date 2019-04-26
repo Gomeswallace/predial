@@ -19,9 +19,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.automacaopredial.domain.Equipamento;
 import com.automacaopredial.dto.EquipamentoDTO;
+import com.automacaopredial.dto.EquipamentoNewDTO;
 import com.automacaopredial.services.EquipamentoService;
-
-import javassist.tools.rmi.ObjectNotFoundException;
 
 @RestController
 @RequestMapping(value="/equipamentos")
@@ -31,7 +30,7 @@ public class EquipamentoResource {
 	private EquipamentoService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<Equipamento> find(@PathVariable Integer id) throws ObjectNotFoundException{
+	public ResponseEntity<Equipamento> find(@PathVariable Integer id) {
 		Equipamento obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
@@ -39,8 +38,8 @@ public class EquipamentoResource {
 	//@PreAuthorize("hasAnyRole('ADMIN')")
 	//mapear o metodo no endpoin equipamentos como POST 
 	@RequestMapping(method = RequestMethod.POST) //@RequestBody permite que o obj seja construido a partir do json enviado 	
-	public ResponseEntity<Void> insert(@Valid @RequestBody EquipamentoDTO objDTO){
-		Equipamento obj = service.fromDTO(objDTO);
+	public ResponseEntity<Void> insert(@Valid @RequestBody EquipamentoNewDTO objNewDTO){
+		Equipamento obj = service.fromDTO(objNewDTO);
 				
 		//ver http status code
 		obj = service.insert(obj); 
@@ -54,7 +53,7 @@ public class EquipamentoResource {
 	
 	//@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value= "/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> Update(@Valid @RequestBody EquipamentoDTO objDTO, @PathVariable Integer id) throws ObjectNotFoundException{
+	public ResponseEntity<Void> Update(@Valid @RequestBody EquipamentoDTO objDTO, @PathVariable Integer id) {
 		Equipamento obj = service.fromDTO(objDTO);
 		obj.setId(id);
 		obj = service.update(obj);
@@ -64,7 +63,7 @@ public class EquipamentoResource {
 	
 	//@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public ResponseEntity<Void> delete(@Valid @PathVariable Integer id) throws ObjectNotFoundException{
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}

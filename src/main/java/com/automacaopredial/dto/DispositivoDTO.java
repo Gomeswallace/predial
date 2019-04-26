@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.Length;
 
 import com.automacaopredial.domain.Dispositivo;
 
-public class DispositivoDTO implements Serializable{	
+public class DispositivoDTO implements Serializable {	
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
