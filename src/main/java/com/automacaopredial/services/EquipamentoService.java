@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.automacaopredial.domain.Ambiente;
 import com.automacaopredial.domain.Equipamento;
@@ -30,6 +31,7 @@ public class EquipamentoService {
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Equipamento.class.getName(), null));
 	}
 	
+	@Transactional
 	public Equipamento insert(Equipamento obj) {
 		//set id null para garantir uma insercao
 		obj.setId(null);		

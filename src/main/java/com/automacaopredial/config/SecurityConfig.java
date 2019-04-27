@@ -1,6 +1,6 @@
 package com.automacaopredial.config;
 
-/*
+
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,32 +8,27 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true) //anotacao para usar a autorizacao nos endpoints
-*/
-public class SecurityConfig {//extends WebSecurityConfigurerAdapter {
-/*
-	@Autowired
-	private UserDetailsService userDetailsService;
+//@EnableGlobalMethodSecurity(prePostEnabled = true) //anotacao para usar a autorizacao nos endpoints
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+//	@Autowired
+//	private UserDetailsService userDetailsService;
 	
 	@Autowired
     private Environment env;
 	
-	@Autowired
-	private JWTUtil jwtUtil;
+//	@Autowired
+//	private JWTUtil jwtUtil;
 	
 	//Vetor que indica quais os caminhos nao precisam de autenticacao para acesso 
 	private static final String[] PUBLIC_MATCHERS = {
@@ -69,17 +64,17 @@ public class SecurityConfig {//extends WebSecurityConfigurerAdapter {
 			.antMatchers(PUBLIC_MATCHERS).permitAll() //permite todos os caminhos deste vetor
 			.anyRequest().authenticated(); //exige autenticacao para todo o resto
 		//add os filtros de autenticacao e autorizacao de tipo usuario
-		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
-		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
+//		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
+//		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
 		//garante que o backand nao cria sessao do usuario
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
 	
-	@Override
+//	@Override
 	//configuracao responsavel para informar qual o userDetailService e o encriptador da senha
-	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
-	}
+//	public void configure(AuthenticationManagerBuilder auth) throws Exception {
+//		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+//	}
 	
 	@Bean
 	//libera o acesso de multiplus caminhos
@@ -91,9 +86,9 @@ public class SecurityConfig {//extends WebSecurityConfigurerAdapter {
 		return source;
 	}
 	
-	@Bean //responsavel por criptografar a senha do usuario
-	public BCryptPasswordEncoder bCryptPasswordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-*/	
+//	@Bean //responsavel por criptografar a senha do usuario
+//	public BCryptPasswordEncoder bCryptPasswordEncoder() {
+//		return new BCryptPasswordEncoder();
+//	}
+	
 }
