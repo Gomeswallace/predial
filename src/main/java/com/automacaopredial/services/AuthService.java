@@ -3,6 +3,7 @@ package com.automacaopredial.services;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.automacaopredial.domain.Usuario;
@@ -15,8 +16,8 @@ public class AuthService {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
-//	@Autowired
-//	private BCryptPasswordEncoder pe;
+	@Autowired
+	private BCryptPasswordEncoder pe;
 	
 //	@Autowired
 //	private EmailService emailService;
@@ -30,10 +31,10 @@ public class AuthService {
 			throw new ObjectNotFoundException("Email não encontrado");
 		}
 		
-//		String newPass = newPassword();
-//		usuario.setSenha(pe.encode(newPass));
+		String newPass = newPassword();
+		usuario.setSenha(pe.encode(newPass));
 		
-//		usuarioRepository.save(usuario);
+		usuarioRepository.save(usuario);
 //		emailService.sendNewPasswordEmail(usuario, newPass);
 	}
 

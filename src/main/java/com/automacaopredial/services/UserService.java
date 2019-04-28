@@ -1,7 +1,11 @@
 package com.automacaopredial.services;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import com.automacaopredial.security.UserSS;
+
 public class UserService {
-/*	
+	
 	public static UserSS authenticated() {
 		try {
 			//retorna o usuario logado no sistema
@@ -11,6 +15,6 @@ public class UserService {
 			return null;
 		}
 	}
-*/
+
 
 }

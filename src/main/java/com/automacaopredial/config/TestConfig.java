@@ -5,17 +5,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.automacaopredial.services.DBService;
+
 @Configuration //indica que a classe é de configuração
 @Profile("test") //indica o profile (dentro de resources) que este arquivo pertence
 public class TestConfig {
 	
-//	@Autowired
-//	private DBService service;
+	@Autowired
+	private DBService service;
 	
 	@Bean
 	public boolean instatiateDataBase() {
 		
-//		service.instantiateTestDataBase();		
+		service.instantiateTestDataBase();		
 		return true;
 	}
 
@@ -28,4 +30,3 @@ public class TestConfig {
 	}
 */	
 }
-

@@ -4,8 +4,14 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class UserSS {//implements UserDetails {
-/*	private static final long serialVersionUID = 1L;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.automacaopredial.domain.enums.TipoUsuario;
+
+public class UserSS implements UserDetails {
+	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
 	private String email;
@@ -68,5 +74,4 @@ public class UserSS {//implements UserDetails {
 		//converte o tipo recebido em granted e verifica se contem na lista de authorities
 		return getAuthorities().contains(new SimpleGrantedAuthority(perfil.getDescricao()));
 	}
-	*/
 }
