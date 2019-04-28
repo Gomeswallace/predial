@@ -31,11 +31,6 @@ public class Usuario implements Serializable{
 	
 	@JsonIgnore
 	private String senha;
-	private Integer tipo;
-	
-	//@ElementCollection
-	//@CollectionTable(name="TELEFONE")
-	//private Set<String> telefones = new HashSet<>();
 
 	//FetchType.EAGER para buscar junto com o usuario o tipo dele
 	@ElementCollection(fetch=FetchType.EAGER)
@@ -80,12 +75,12 @@ public class Usuario implements Serializable{
 		this.email = email;
 	}
 	
-	public TipoUsuario getTipo() {
-		return TipoUsuario.toEnum(tipo);
+	public Set<TipoUsuario> getTipos() {
+		return tiposUsuario.stream().map(x -> TipoUsuario.toEnum(x)).collect(Collectors.toSet());
 	}
 
-	public void setTipo(TipoUsuario tipo) {
-		this.tipo = tipo.getCod();
+	public void addTipoUsuario(TipoUsuario tipo) {
+		tiposUsuario.add(tipo.getCod());
 	}
 		
 	public String getSenha() {
@@ -94,14 +89,6 @@ public class Usuario implements Serializable{
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-	
-	public Set<TipoUsuario> getTipos() {//converte a colecao tiposUsuarios em perfils de usuario 
-		return tiposUsuario.stream().map(x -> TipoUsuario.toEnum(x)).collect(Collectors.toSet());
-	}
-
-	public void addTipoUsuario(TipoUsuario tipo) {
-		tiposUsuario.add(tipo.getCod());
 	}
 	 
 	@Override

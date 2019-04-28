@@ -25,13 +25,13 @@ public class UsuarioDTO implements Serializable{
 	
 	private String senha;
 	
-	private TipoUsuario tipo;
+	private TipoUsuario tipoUsuario; 
 	
 	public UsuarioDTO(Usuario obj) {
 		this.id=obj.getId();
 		this.nome=obj.getNome();
 		this.email=obj.getEmail();
-		this.tipo= obj.getTipo();
+		//this.tipoUsuario= obj.getTipos();
 		this.senha = obj.getSenha();
 	}
 
@@ -57,14 +57,6 @@ public class UsuarioDTO implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public TipoUsuario getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(TipoUsuario tipo) {
-		this.tipo = tipo;
 	}
 
 	public String getSenha() {

@@ -2,7 +2,7 @@ package com.automacaopredial.domain.enums;
 
 public enum TipoUsuario {
 	//prefixo ROLE_ obrigatorio do framework spring
-	ADMINISTRADOR(1, "ROLE_ADMIN"),
+	ADMIN(1, "ROLE_ADMIN"),
 	CLIENTE(2, "ROLE_CLIENTE");
 	
 	private int cod;

@@ -44,8 +44,7 @@ public class UsuarioService {
 
 	public Usuario find(Integer id) {
 		UserSS user = UserService.authenticated();
-		if (user == null || !user.hasRole(TipoUsuario.ADMINISTRADOR) && 
-			!id.equals(user.getId())) {
+		if (user == null || !user.hasRole(TipoUsuario.ADMIN) && !id.equals(user.getId())) {
 			throw new AuthorizationException("Acesso negado");
 		}
 
@@ -82,10 +81,9 @@ public class UsuarioService {
 
 	public Usuario findByEmail(String email) {
 		UserSS user = UserService.authenticated();
-		// if (user == null || !user.hasRole(TipoUsuario.ADMINISTRADOR) &&
-		// !email.equals(user.getUsername())) {
-		// throw new AuthorizationException("Acesso negado");
-		// }
+		if (user == null || !user.hasRole(TipoUsuario.ADMIN) && !email.equals(user.getUsername())) {
+			throw new AuthorizationException("Acesso negado");
+		}
 
 		Usuario obj = repo.findByEmail(email);
 		if (obj == null) {
