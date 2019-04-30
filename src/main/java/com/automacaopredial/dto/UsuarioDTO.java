@@ -4,12 +4,16 @@ import java.io.Serializable;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
 import com.automacaopredial.domain.Usuario;
 import com.automacaopredial.domain.enums.TipoUsuario;
+import com.automacaopredial.services.validation.UsuarioUpdate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@UsuarioUpdate
 public class UsuarioDTO implements Serializable{	
 	private static final long serialVersionUID = 1L;
 
@@ -23,6 +27,7 @@ public class UsuarioDTO implements Serializable{
 	@Email(message="E-mail invalido.")
 	private String email;
 	
+	@NotEmpty(message="Preenchimento obrigatório.")
 	private String senha;
 	
 	private TipoUsuario tipoUsuario; 

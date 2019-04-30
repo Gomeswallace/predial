@@ -99,11 +99,13 @@ public class UsuarioService {
 	}
 
 	public Usuario fromDTO(UsuarioDTO objDTO) {
-		return new Usuario(objDTO.getId(), objDTO.getNome(), objDTO.getEmail(), objDTO.getSenha());
+		return new Usuario(objDTO.getId(), objDTO.getNome(), 
+						   objDTO.getEmail(), pe.encode(objDTO.getSenha()));
 	}
 
-	public Usuario fromDTO(UsuarioNewDTO objDto) {
-		Usuario user = new Usuario(null, objDto.getNome(), objDto.getEmail(), pe.encode(objDto.getSenha()));
+	public Usuario fromDTO(UsuarioNewDTO objNewDto) {
+		Usuario user = new Usuario(null, objNewDto.getNome(), objNewDto.getEmail(), 
+									pe.encode(objNewDto.getSenha()));
 		return user;
 	}
 
