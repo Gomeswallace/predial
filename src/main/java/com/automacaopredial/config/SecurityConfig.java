@@ -19,6 +19,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.automacaopredial.security.JWTAuthenticationFilter;
+import com.automacaopredial.security.JWTAuthorizationFilter;
 import com.automacaopredial.security.JWTUtil;
 
 @Configuration
@@ -74,7 +75,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.anyRequest().authenticated(); //exige autenticacao para todo o resto
 		//add os filtros de autenticacao e autorizacao de tipo usuario
 		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
-//		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
+		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
 		//garante que o backand nao cria sessao do usuario
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
