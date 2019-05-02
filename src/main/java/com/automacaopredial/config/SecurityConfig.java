@@ -18,6 +18,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.automacaopredial.security.JWTAuthenticationFilter;
+import com.automacaopredial.security.JWTUtil;
+
 @Configuration
 @EnableWebSecurity
 //@EnableGlobalMethodSecurity(prePostEnabled = true) //anotacao para usar a autorizacao nos endpoints
@@ -29,8 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
     private Environment env;
 	
-//	@Autowired
-//	private JWTUtil jwtUtil;
+	@Autowired
+	private JWTUtil jwtUtil;
 	
 	//Vetor que indica quais os caminhos nao precisam de autenticacao para acesso 
 	private static final String[] PUBLIC_MATCHERS = {
@@ -70,7 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers(PUBLIC_MATCHERS).permitAll() //permite todos os caminhos deste vetor
 			.anyRequest().authenticated(); //exige autenticacao para todo o resto
 		//add os filtros de autenticacao e autorizacao de tipo usuario
-//		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
+		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
 //		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
 		//garante que o backand nao cria sessao do usuario
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

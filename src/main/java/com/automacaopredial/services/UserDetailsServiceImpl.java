@@ -1,14 +1,18 @@
 package com.automacaopredial.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.automacaopredial.domain.Usuario;
 import com.automacaopredial.repositories.UsuarioRepository;
+import com.automacaopredial.security.UserSS;
 
 @Service
-public class UserDetailsServiceImpl {//implements UserDetailsService {
-/*
+public class UserDetailsServiceImpl implements UserDetailsService {
+
 	@Autowired
 	private UsuarioRepository repo;
 	
@@ -22,5 +26,4 @@ public class UserDetailsServiceImpl {//implements UserDetailsService {
 		//retorna os dados os usuarios 
 		return new UserSS(user.getId(), user.getEmail(), user.getSenha(), user.getTipos());
 	}
-*/
 }

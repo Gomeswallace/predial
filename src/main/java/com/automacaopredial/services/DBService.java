@@ -38,10 +38,10 @@ public class DBService {
 	
 	public void instantiateTestDataBase() {
 	
-		Usuario user1 = new Usuario(null, "Wallace", "gomes.wallace@email.com", pe.encode("123"));
+		Usuario user1 = new Usuario(null, "Wallace", "wallace@email.com", pe.encode("123"));
 		user1.addTipoUsuario(TipoUsuario.ADMIN);
 		
-		Usuario user2 = new Usuario(null, "Maria", "maria@email.com", pe.encode("1234"));
+		Usuario user2 = new Usuario(null, "Maria", "maria@email.com", pe.encode("123"));
 		user1.addTipoUsuario(TipoUsuario.CLIENTE);
 		
 		Dispositivo disp1 = new Dispositivo(null, "Dispositivo 1", "TESTE", TipoDispositivo.ARDUINO_MEGA_2560);
