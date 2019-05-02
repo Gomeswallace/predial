@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +36,7 @@ public class EquipamentoResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	//@PreAuthorize("hasAnyRole('ADMIN')")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	//mapear o metodo no endpoin equipamentos como POST 
 	@RequestMapping(method = RequestMethod.POST) //@RequestBody permite que o obj seja construido a partir do json enviado 	
 	public ResponseEntity<Void> insert(@Valid @RequestBody EquipamentoNewDTO objNewDTO){
@@ -51,7 +52,7 @@ public class EquipamentoResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
-	//@PreAuthorize("hasAnyRole('ADMIN')")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value= "/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Void> Update(@Valid @RequestBody EquipamentoDTO objDTO, @PathVariable Integer id) {
 		Equipamento obj = service.fromDTO(objDTO);
@@ -61,7 +62,7 @@ public class EquipamentoResource {
 		return ResponseEntity.noContent().build();
 	}
 	
-	//@PreAuthorize("hasAnyRole('ADMIN')")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
