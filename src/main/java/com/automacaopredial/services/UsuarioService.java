@@ -43,6 +43,7 @@ public class UsuarioService {
 	// private Integer size;
 
 	public Usuario find(Integer id) {
+		//retorna o usuario logado
 		UserSS user = UserService.authenticated();
 		if (user == null || !user.hasRole(TipoUsuario.ADMIN) && !id.equals(user.getId())) {
 			throw new AuthorizationException("Acesso negado");
