@@ -18,7 +18,7 @@ import com.automacaopredial.services.UserService;
 @RestController
 @RequestMapping(value = "/auth")
 public class AuthResource {
-/*
+
 	@Autowired
 	private JWTUtil jwtUtil;
 	
@@ -28,20 +28,20 @@ public class AuthResource {
 	//metodo protegido por autorizao, precisa logar 
 	@RequestMapping(value = "/refresh_token", method = RequestMethod.POST)
 	public ResponseEntity<Void> refreshToken(HttpServletResponse response) {
-		//pega usuariologago
+		//pega usuario logago
 		UserSS user = UserService.authenticated();
 		//gera um novo token com a data atual
 		String token = jwtUtil.generateToken(user.getUsername());
 		response.addHeader("Authorization", "Bearer " + token);
 		response.addHeader("access-control-expose-headers", "Authorization");
-		return ResponseEntity.noContent().build();
+
 		//retorna o objeto com a autorizacao e com o token
+		return ResponseEntity.noContent().build();
 	}
 	
-	@RequestMapping(value = "/forgot", method = RequestMethod.POST)
-	public ResponseEntity<Void> forgot(@Valid @RequestBody EmailDTO objDto) {
-		service.sendNewPassword(objDto.getEmail());
-		return ResponseEntity.noContent().build();
-	}
-	*/
+//	@RequestMapping(value = "/forgot", method = RequestMethod.POST)
+//	public ResponseEntity<Void> forgot(@Valid @RequestBody EmailDTO objDto) {
+//		service.sendNewPassword(objDto.getEmail());
+//		return ResponseEntity.noContent().build();
+//	}
 }
