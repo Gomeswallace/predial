@@ -27,6 +27,7 @@ public class UsuarioDTO implements Serializable{
 	@Email(message="E-mail invalido.")
 	private String email;
 	
+	@JsonIgnore
 	@NotEmpty(message="Preenchimento obrigatório.")
 	private String senha;
 	

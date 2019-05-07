@@ -4,12 +4,10 @@ import java.io.Serializable;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
 import com.automacaopredial.services.validation.UsuarioInsert;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @UsuarioInsert
 public class UsuarioNewDTO  implements Serializable{

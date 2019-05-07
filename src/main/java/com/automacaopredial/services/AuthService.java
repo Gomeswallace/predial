@@ -19,23 +19,23 @@ public class AuthService {
 	@Autowired
 	private BCryptPasswordEncoder pe;
 	
-//	@Autowired
-//	private EmailService emailService;
+	private EmailService emailService;
 	
 	private Random rand = new Random();
 	
 	public void sendNewPassword(String email) {
 		
+		//verifica se o email existe na base
 		Usuario usuario = usuarioRepository.findByEmail(email);
 		if (usuario == null) {
-			throw new ObjectNotFoundException("Email não encontrado");
+			throw new ObjectNotFoundException("E-mail não encontrado");
 		}
 		
 		String newPass = newPassword();
 		usuario.setSenha(pe.encode(newPass));
 		
 		usuarioRepository.save(usuario);
-//		emailService.sendNewPasswordEmail(usuario, newPass);
+		emailService.sendNewPasswordEmail(usuario, newPass);
 	}
 
 	private String newPassword() {
@@ -48,7 +48,7 @@ public class AuthService {
 
 	private char randomChar() {
 		int opt = rand.nextInt(3);
-		if (opt == 0) { // gera um digito
+		if (opt == 0) { // gera um digito a partir da tabela unicode
 			return (char) (rand.nextInt(10) + 48);
 		}
 		else if (opt == 1) { // gera letra maiuscula
@@ -59,4 +59,3 @@ public class AuthService {
 		}
 	}
 }
-

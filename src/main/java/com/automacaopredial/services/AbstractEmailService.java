@@ -3,6 +3,7 @@ package com.automacaopredial.services;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
 
 import com.automacaopredial.domain.Dispositivo;
 import com.automacaopredial.domain.Usuario;
@@ -13,17 +14,17 @@ public abstract class AbstractEmailService implements EmailService {
 	@Value("${default.sender}")
 	private String sender;
 	
-/*	@Override
+	@Override
 	public void sendOrderConfirmationEmail(Dispositivo obj) {
 		SimpleMailMessage sm = prepareSimpleMailMessageFromPedido(obj);
-		sendEmail(sm);
+		sendEmail(sm); //template method
 	}
-
+	
 	protected SimpleMailMessage prepareSimpleMailMessageFromPedido(Dispositivo obj) {
 		SimpleMailMessage sm = new SimpleMailMessage();
 		//sm.setTo(obj.getUsuario().getEmail());
 		sm.setFrom(sender);
-		sm.setSubject("Pedido confirmado! Código: " + obj.getId());
+		sm.setSubject("Novo dispositivo cadastrado! Código: " + obj.getId());
 		sm.setSentDate(new Date(System.currentTimeMillis()));
 		sm.setText(obj.toString());
 		return sm;
@@ -44,5 +45,4 @@ public abstract class AbstractEmailService implements EmailService {
 		sm.setText("Nova senha: " + newPass);
 		return sm;
 	}
-		*/
 }

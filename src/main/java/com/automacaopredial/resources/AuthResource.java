@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.automacaopredial.dto.EmailDTO;
 import com.automacaopredial.security.JWTUtil;
 import com.automacaopredial.security.UserSS;
 import com.automacaopredial.services.AuthService;
@@ -39,9 +40,9 @@ public class AuthResource {
 		return ResponseEntity.noContent().build();
 	}
 	
-//	@RequestMapping(value = "/forgot", method = RequestMethod.POST)
-//	public ResponseEntity<Void> forgot(@Valid @RequestBody EmailDTO objDto) {
-//		service.sendNewPassword(objDto.getEmail());
-//		return ResponseEntity.noContent().build();
-//	}
+	@RequestMapping(value = "/forgot", method = RequestMethod.POST)
+	public ResponseEntity<Void> forgot(@Valid @RequestBody EmailDTO objDto) {
+		service.sendNewPassword(objDto.getEmail());
+		return ResponseEntity.noContent().build();
+	}
 }

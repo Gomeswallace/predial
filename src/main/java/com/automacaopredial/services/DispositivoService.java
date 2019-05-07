@@ -29,8 +29,8 @@ public class DispositivoService {
 	@Autowired
 	private AmbienteRepository ambienteRepository;
 	
-	//@Autowired
-	//private EmailService emailService; 
+	@Autowired
+	private EmailService emailService; 
 	
 	public Dispositivo find(Integer id) {
 		Optional<Dispositivo> obj = repo.findById(id);
@@ -43,6 +43,7 @@ public class DispositivoService {
 		obj.setId(null); //id null para garantir a insercao		
 		repo.save(obj); //utiliza os metodos do spring data
 		ambienteRepository.saveAll(obj.getAmbientes());
+		emailService.sendOrderConfirmationEmail(obj);
 		return obj;
 	}
 	

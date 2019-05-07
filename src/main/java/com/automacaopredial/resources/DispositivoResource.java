@@ -36,7 +36,7 @@ public class DispositivoResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	@PreAuthorize("hasAnyRole('ADMINISTRADOR')")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody DispositivoNewDTO objnewDTO){ //converte o obj em json
 		Dispositivo obj = service.fromDTO(objnewDTO);
@@ -49,7 +49,7 @@ public class DispositivoResource {
 		return ResponseEntity.created(uri).build();		
 	}
 	
-	@PreAuthorize("hasAnyRole('ADMINISTRADOR')")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody DispositivoDTO objDTO, @PathVariable Integer id){
 		Dispositivo obj = service.fromDTO(objDTO);
@@ -58,7 +58,7 @@ public class DispositivoResource {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PreAuthorize("hasAnyRole('ADMINISTRADOR')")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
