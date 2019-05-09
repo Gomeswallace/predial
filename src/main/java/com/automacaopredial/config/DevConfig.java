@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.automacaopredial.services.DBService;
+import com.automacaopredial.services.EmailService;
+import com.automacaopredial.services.SmtpEmailService;
 
 @Configuration //indica que a classe é de configuração
 @Profile("dev") //indica o profile (dentro de resources) que este arquivo pertence
@@ -29,10 +31,8 @@ public class DevConfig {
 		return true;
 	}
 	
-	
-	/*@Bean
+	@Bean
 	public EmailService emailService() {
 		return new SmtpEmailService();
 	}
-	*/
 }

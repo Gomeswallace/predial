@@ -1,5 +1,7 @@
 package com.automacaopredial.services;
 
+import javax.mail.internet.MimeMessage;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.mail.SimpleMailMessage;
@@ -26,5 +28,13 @@ public class MockEmailService extends AbstractEmailService{
 		LOG.info("Alterou sua senha. Nova senha: ");
 		LOG.info(newPass);
 		LOG.info("E-mail enviado com sucesso!!!");		
+	}
+
+	@Override
+	public void sendHtmlEmail(MimeMessage msg) {
+		LOG.info("Simulando o envio de e-mail HTML...");
+		LOG.info(msg.toString());
+		LOG.info("E-mail enviado com sucesso!!!");
+		
 	}
 }
