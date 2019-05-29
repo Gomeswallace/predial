@@ -15,6 +15,7 @@ import com.automacaopredial.domain.Equipamento;
 import com.automacaopredial.domain.enums.TipoEquipamento;
 import com.automacaopredial.dto.EquipamentoDTO;
 import com.automacaopredial.dto.EquipamentoNewDTO;
+import com.automacaopredial.repositories.AmbienteRepository;
 import com.automacaopredial.repositories.EquipamentoRepository;
 import com.automacaopredial.services.exceptions.DataIntegrityException;
 import com.automacaopredial.services.exceptions.ObjectNotFoundException;
@@ -24,6 +25,9 @@ public class EquipamentoService {
 			
 	@Autowired //será instancia automaticamente pelo spring pela injecao de depencia ou inversao de controle
 	public EquipamentoRepository repo;
+	
+	@Autowired
+	public AmbienteRepository ambienteRepository;
 
 	public Equipamento find(Integer id) {
 		Optional<Equipamento> obj = repo.findById(id);
@@ -61,6 +65,12 @@ public class EquipamentoService {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, 
 												 Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
+	}
+	
+	public Page<Equipamento> search(String nome, Integer id, Integer page, Integer linesPerPage, String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		Optional<Ambiente> ambiente = ambienteRepository.findById(id);
+		return repo.search(nome, ambiente, pageRequest);	
 	}
 	
 	public Equipamento fromDTO(EquipamentoDTO objDTO) {

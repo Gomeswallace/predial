@@ -2,14 +2,9 @@ package com.automacaopredial.services;
 
 import java.util.Date;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
@@ -25,8 +20,8 @@ public abstract class AbstractEmailService implements EmailService {
 	@Autowired
 	private TemplateEngine templateEngine;
 	
-	@Autowired
-	private JavaMailSender javaMailSender; 
+	//@Autowired
+	//private JavaMailSender javaMailSender; 
 	
 	@Override
 	public void sendOrderConfirmationEmail(Dispositivo obj) {
@@ -65,7 +60,7 @@ public abstract class AbstractEmailService implements EmailService {
 		context.setVariable("dispositio", obj);
 		return templateEngine.process("email/InsercaoDispositivo", context);		
 	}
-	
+/*	
 	@Override
 	public void sendOrderConfirmationHtmlEmail(Dispositivo obj) {
 		try {
@@ -87,4 +82,5 @@ public abstract class AbstractEmailService implements EmailService {
 		mmh.setText(htmlFromTemplateDispositivo(obj), true);
 		return mimeMessage;
 	}
+	*/
 }

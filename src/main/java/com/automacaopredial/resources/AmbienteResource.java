@@ -21,6 +21,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.automacaopredial.domain.Ambiente;
 import com.automacaopredial.dto.AmbienteDTO;
 import com.automacaopredial.dto.AmbienteNewDTO;
+import com.automacaopredial.resources.utils.URL;
 import com.automacaopredial.services.AmbienteService;
 
 @RestController
@@ -76,14 +77,20 @@ public class AmbienteResource {
 	}
 	
 	@RequestMapping(value="/page", method=RequestMethod.GET)
-	public ResponseEntity<Page<Ambiente>> findPage(
+	public ResponseEntity<Page<AmbienteDTO>> findPage(
+			 @RequestParam(value="nome", defaultValue="") String nome,
+			 @RequestParam(value="dispositivo", defaultValue="") String dispositivo,
 			 @RequestParam(value="page", defaultValue="0")  Integer page, 
 			 @RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
 			 @RequestParam(value="orderBy", defaultValue="nome") String orderBy, 
 			 @RequestParam(value="direction", defaultValue="ASC") String direction){
-		Page<Ambiente> list = service.findPage(page, linesPerPage, orderBy, direction);
+		String nomeDecoded = URL.decodeParam(nome);
+		//List<Integer> ids = URL.decodeIntList(dispositivos);
+		Integer id = Integer.parseInt(dispositivo);
+		Page<Ambiente> list = service.search(nomeDecoded, id, page, linesPerPage, orderBy, direction);
+		Page<AmbienteDTO> listDto = list.map(obj -> new AmbienteDTO(obj));
 		//lista de dto para o stream converter cada obj em dto pela funcao anonima e depois retornar essa lista
 		//Page<Ambiente> listDTO = list.map(obj -> new Ambiente(obj));
-		return ResponseEntity.ok().body(list);
+		return ResponseEntity.ok().body(listDto);
 	}
 }

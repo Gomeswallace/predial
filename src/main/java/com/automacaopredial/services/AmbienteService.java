@@ -17,6 +17,7 @@ import com.automacaopredial.domain.enums.TipoEquipamento;
 import com.automacaopredial.dto.AmbienteDTO;
 import com.automacaopredial.dto.AmbienteNewDTO;
 import com.automacaopredial.repositories.AmbienteRepository;
+import com.automacaopredial.repositories.DispositivoRepository;
 import com.automacaopredial.repositories.EquipamentoRepository;
 import com.automacaopredial.services.exceptions.DataIntegrityException;
 import com.automacaopredial.services.exceptions.ObjectNotFoundException;
@@ -29,6 +30,9 @@ public class AmbienteService {
 	
 	@Autowired
 	public EquipamentoRepository equipamentoRepository;
+	
+	@Autowired
+	private DispositivoRepository dispositivoRepository;
 	
 	public Ambiente find(Integer id) {
 		Optional<Ambiente> obj = repo.findById(id);
@@ -67,6 +71,12 @@ public class AmbienteService {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, 
 												 Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
+	}
+	
+	public Page<Ambiente> search(String nome, Integer id, Integer page, Integer linesPerPage, String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		Optional<Dispositivo> dispositivo = dispositivoRepository.findById(id);
+		return repo.search(nome, dispositivo, pageRequest);	
 	}
 	
 	public Ambiente fromDTO(AmbienteDTO objDTO) {

@@ -21,6 +21,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.automacaopredial.domain.Equipamento;
 import com.automacaopredial.dto.EquipamentoDTO;
 import com.automacaopredial.dto.EquipamentoNewDTO;
+import com.automacaopredial.resources.utils.URL;
 import com.automacaopredial.services.EquipamentoService;
 
 @RestController
@@ -81,13 +82,21 @@ public class EquipamentoResource {
 	@RequestMapping(value="/page", method=RequestMethod.GET)
 	public ResponseEntity<Page<EquipamentoDTO>> findPage(
 			//requestParam informa que o parametro é opcional
+			 @RequestParam(value="nome", defaultValue="") String nome,
+			 @RequestParam(value="ambiente", defaultValue="") String ambiente,
 			 @RequestParam(value="page", defaultValue="0")  Integer page, 
 			 @RequestParam(value="linesPerPage", defaultValue="4") Integer linesPerPage, 
 			 @RequestParam(value="orderBy", defaultValue="nome") String orderBy, 
 			 @RequestParam(value="direction", defaultValue="ASC") String direction){
-		Page<Equipamento> list = service.findPage(page, linesPerPage, orderBy, direction);
-		//lista de dto para o stream converter cada obj em dto pela funcao anonima e depois retornar essa lista
+		String nomeDecoded = URL.decodeParam(nome);
+		//List<Integer> ids = URL.decodeIntList(dispositivos);
+		Integer id = Integer.parseInt(ambiente);
+		Page<Equipamento> list = service.search(nomeDecoded, id, page, linesPerPage, orderBy, direction);
 		Page<EquipamentoDTO> listDTO = list.map(obj -> new EquipamentoDTO(obj));
+		
+		//Page<Equipamento> list = service.findPage(page, linesPerPage, orderBy, direction);
+		//lista de dto para o stream converter cada obj em dto pela funcao anonima e depois retornar essa lista
+		//Page<EquipamentoDTO> listDTO = list.map(obj -> new EquipamentoDTO(obj));
 		return ResponseEntity.ok().body(listDTO);
 	}
 }
