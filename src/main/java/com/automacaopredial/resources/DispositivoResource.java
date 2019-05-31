@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.automacaopredial.domain.Dispositivo;
+import com.automacaopredial.domain.DispositivoTipo;
 import com.automacaopredial.dto.DispositivoDTO;
 import com.automacaopredial.dto.DispositivoNewDTO;
 import com.automacaopredial.services.DispositivoService;
@@ -38,8 +39,8 @@ public class DispositivoResource {
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody DispositivoNewDTO objnewDTO){ //converte o obj em json
-		Dispositivo obj = service.fromDTO(objnewDTO);
+	public ResponseEntity<Void> insert(@Valid @RequestBody DispositivoNewDTO objnewDTO, @Valid @RequestBody DispositivoTipo tipo){ //converte o obj em json
+		Dispositivo obj = service.fromDTO(objnewDTO, tipo);
 		obj = service.insert(obj);
 		//pega o id do novo recurso criado e add na url
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -64,8 +65,7 @@ public class DispositivoResource {
 		service.delete(id);
 		
 		return ResponseEntity.noContent().build();					
-	}
-	
+	}	
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<DispositivoDTO>> findAll() {

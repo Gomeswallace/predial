@@ -45,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	//vetor com caminhos livres para consulta
 	private static final String[] PUBLIC_MATCHERS_GET = {
 			"/dispositivos/**",
+			"/tiposdispositivos/**",
 			"/ambientes/**",
 			"/equipamentos/**",
 			"/usuarios/**"

@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.automacaopredial.domain.Ambiente;
 import com.automacaopredial.domain.Dispositivo;
-import com.automacaopredial.domain.enums.TipoDispositivo;
+import com.automacaopredial.domain.DispositivoTipo;
 import com.automacaopredial.dto.DispositivoDTO;
 import com.automacaopredial.dto.DispositivoNewDTO;
 import com.automacaopredial.repositories.AmbienteRepository;
@@ -28,6 +28,9 @@ public class DispositivoService {
 	
 	@Autowired
 	private AmbienteRepository ambienteRepository;
+	
+	//@Autowired
+	//private DispositivoTipoService dispositivoTipoService; 
 	
 	@Autowired
 	private EmailService emailService; 
@@ -72,21 +75,17 @@ public class DispositivoService {
 		return repo.findAll(pageRequest);
 	}
 	
-	//public void teste(Dispositivo obj) {
-	//	emailService.sendOrderConfirmationEmail(obj);;
-	//}
-	
 	public Dispositivo fromDTO(DispositivoDTO objDTO) {
 			return new Dispositivo(objDTO.getId(), objDTO.getNome(), objDTO.getDescricao(), null);
 	}
 	
-	public Dispositivo fromDTO(DispositivoNewDTO objnewDTO) {
-		Dispositivo disp = new Dispositivo(null, objnewDTO.getNome(), objnewDTO.getDescricao(), 
-											TipoDispositivo.toEnum(objnewDTO.getTipo()));
+	public Dispositivo fromDTO(DispositivoNewDTO objnewDTO, DispositivoTipo tipo) {
+		Dispositivo disp = new Dispositivo(null, objnewDTO.getNome(), objnewDTO.getDescricao(), tipo);     
+											//DispositivoTipoService.toTipo(objnewDTO.getTipo()));
 		Ambiente amb = new Ambiente(null, objnewDTO.getAmbienteNome(), objnewDTO.getAmbienteDescricao(), disp);
 		disp.getAmbientes().add(amb);
 		return disp;
-	}
+	}	
 	
 	private void updateData(Dispositivo newObj, Dispositivo obj) {
 		newObj.setNome(obj.getNome());

@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.automacaopredial.domain.enums.TipoDispositivo;
-
 @Entity
 public class Dispositivo implements Serializable{	
 	private static final long serialVersionUID = 1L;
@@ -29,12 +27,12 @@ public class Dispositivo implements Serializable{
 	public Dispositivo() {		
 	}
 	
-	public Dispositivo(Integer id, String nome, String descricao, TipoDispositivo tipo) {
+	public Dispositivo(Integer id, String nome, String descricao, DispositivoTipo tipo) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
-		this.tipo = (tipo == null) ? null : tipo.getCod();
+		this.tipo = (tipo == null) ? null : tipo.getId();
 	}
 
 	public Integer getId() {
