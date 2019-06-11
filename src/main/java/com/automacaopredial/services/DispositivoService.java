@@ -23,9 +23,6 @@ public class DispositivoService {
 	@Autowired
 	private DispositivoRepository repo;
 	
-	//@Autowired
-	//private AmbienteService ambienteService;
-	
 	@Autowired
 	private DispositivoTipoService dispositivoTipoService; 
 	
@@ -42,15 +39,16 @@ public class DispositivoService {
 	public Dispositivo insert(Dispositivo obj) {
 		obj.setId(null); //id null para garantir a insercao		
 		repo.save(obj); //utiliza os metodos do spring data
-		//ambienteService.saveAll(obj.getAmbientes());
 		emailService.sendOrderConfirmationEmail(obj);
 		return obj;
 	}
 	
 	public Dispositivo update(Dispositivo obj) {
 		Dispositivo newObj = find(obj.getId()); //verifica se o obj existe antes de tentar atualizar
-		updateData(newObj, obj); //Criado o metodo para tratar quais os dados podem ser atualizados
-		return repo.save(newObj);
+		updateData(newObj, obj); //Criado o metodo para tratar quais os dados podem ser atualizados		
+		repo.save(newObj);
+		emailService.sendOrderConfirmationEmail(obj);
+		return newObj;
 	}
 	
 	public void delete(Integer id) {
@@ -90,14 +88,6 @@ public class DispositivoService {
 										   objnewDTO.getNome(), 
 										   objnewDTO.getDescricao(), 
 										   dispositivoTipoService.toTipo(objnewDTO.getIdTipo()));
-		
-		/*List<Ambiente> amb = new ArrayList<>();
-		if(!objnewDTO.getIdAmbientes().isEmpty()) {			
-			amb = (List<Ambiente>) ambienteService.search("", objnewDTO.getId(), 0, 24,"nome","ASC");	
-		}
-		
-		disp.getAmbientes().addAll(amb);
-		*/
 		return disp;
 	}	
 	

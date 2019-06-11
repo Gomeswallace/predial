@@ -19,6 +19,7 @@ public class AmbienteDTO implements Serializable{
 	@Length(min=5, message="O tamanho deve ser mínimo de 5 caracteres.")
 	private String nome;
 	
+	@NotEmpty(message="Preenchimento obrigatório.")
 	private String descricao;
 	
 	@NotNull(message="Preenchimento obrigatório")

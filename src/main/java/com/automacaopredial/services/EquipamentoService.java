@@ -83,12 +83,7 @@ public class EquipamentoService {
 	public Equipamento fromDTO(EquipamentoNewDTO objNewDTO) {
 		Ambiente amb = ambienteService.find(objNewDTO.getAmbienteId());
 		Equipamento equip = new Equipamento(null, objNewDTO.getNome(), objNewDTO.getPorta(),
-					objNewDTO.isStatus(), TipoEquipamento.toEnum(objNewDTO.getTipo()), amb);
-		
-		//Equipamento equip = new Equipamento(null, objNewDTO.getEquipamentoNome(), objNewDTO.getEquipamentoPorta(),
-				//		objNewDTO.isEquipamentoStatus(), TipoEquipamento.toEnum(objNewDTO.getEquipamentoTipo()), amb);
-		amb.getEquipamentos().add(equip);
-
+								objNewDTO.isStatus(), TipoEquipamento.toEnum(objNewDTO.getTipo()), amb);
 		return equip;
 	}
 	
@@ -96,6 +91,5 @@ public class EquipamentoService {
 		newObj.setNome(obj.getNome());
 		newObj.setPorta(obj.getPorta());
 		newObj.setStatus(obj.isStatus());
-		newObj.setTipo(TipoEquipamento.toEnum(obj.getTipo()));
 	}
 }

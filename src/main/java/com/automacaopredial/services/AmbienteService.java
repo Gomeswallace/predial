@@ -51,10 +51,7 @@ public class AmbienteService {
 	
 	public Ambiente update(Ambiente obj) {
 		Ambiente newObj = find(obj.getId()); //verifica se o obj existe antes de tentar atualizar		
-		updateData(newObj, obj); //Criado o metodo para tratar quais os dados podem ser atualizados
-		
-		//Dispositivo disp = dispositivoService.find(newObj.getId());
-		//disp.getAmbientes().add(newObj);
+		updateData(newObj, obj); //Criado o metodo para tratar quais os dados podem ser atualizados		
 		return repo.save(newObj);
 	}
 	
@@ -96,15 +93,8 @@ public class AmbienteService {
 	}
 	
 	public Ambiente fromDTO(AmbienteNewDTO objNewDTO) {
-		//Dispositivo disp = new Dispositivo(objNewDTO.getDispositivoId(), null, null, null);
 		Dispositivo disp = dispositivoService.find(objNewDTO.getDispositivoId());
 		Ambiente amb = new Ambiente(null, objNewDTO.getNome(), objNewDTO.getDescricao(), disp);
-		
-		//Equipamento equip = new Equipamento(null, objNewDTO.getEquipamentoNome(), objNewDTO.getEquipamentoPorta(),
-		//		objNewDTO.isEquipamentoStatus(), TipoEquipamento.toEnum(objNewDTO.getEquipamentoTipo()), amb);
-		//amb.getEquipamentos().add(equip);
-		
-		//disp.getAmbientes().add(amb);
 		return amb;
 	}
 	

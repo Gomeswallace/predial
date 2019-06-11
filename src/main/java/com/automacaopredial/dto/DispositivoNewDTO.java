@@ -21,12 +21,6 @@ public class DispositivoNewDTO implements Serializable {
 	
 	@NotNull()
 	private Integer idTipo;
-	
-	//private List<Ambiente> idAmbientes = new ArrayList<>();
-	
-	//private String ambienteNome;
-	
-	//private String ambienteDescricao;
 
 	public DispositivoNewDTO() {
 		
@@ -63,13 +57,4 @@ public class DispositivoNewDTO implements Serializable {
 	public void setIdTipo(Integer idTipo) {
 		this.idTipo = idTipo;
 	}
-/*
-	public List<Ambiente> getIdAmbientes() {
-		return idAmbientes;
-	}
-
-	public void setIdAmbientes(List<Ambiente> idAmbientes) {
-		this.idAmbientes = idAmbientes;
-	}
-*/
 }

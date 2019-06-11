@@ -13,10 +13,15 @@ public class DispositivoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
+
 	@NotEmpty(message="Preenchimento obrigatório.")
 	@Length(min=5, message="O tamanho deve ser mínimo de 5 caracteres.")
 	private String nome;
+	
+	@NotEmpty(message="Preenchimento obrigatório.")
 	private String descricao;
+	
+	@NotEmpty(message="Preenchimento obrigatório.")
 	private DispositivoTipo dispositivoTipo;
 	
 	public DispositivoDTO() {

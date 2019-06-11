@@ -41,8 +41,7 @@ public class EquipamentoResource {
 	//mapear o metodo no endpoin equipamentos como POST 
 	@RequestMapping(method = RequestMethod.POST) //@RequestBody permite que o obj seja construido a partir do json enviado 	
 	public ResponseEntity<Void> insert(@Valid @RequestBody EquipamentoNewDTO objNewDTO){
-		Equipamento obj = service.fromDTO(objNewDTO);
-				
+		Equipamento obj = service.fromDTO(objNewDTO);				
 		//ver http status code
 		obj = service.insert(obj); 
 		//o http tem seus codigos de retorno apos realizar a operacao
@@ -55,9 +54,9 @@ public class EquipamentoResource {
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value= "/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> Update(@Valid @RequestBody EquipamentoNewDTO objNewDTO) {
+	public ResponseEntity<Void> Update(@Valid @RequestBody EquipamentoNewDTO objNewDTO, @PathVariable Integer id) {
 		Equipamento obj = service.fromDTO(objNewDTO);
-		//obj.setId(id);
+		obj.setId(id);
 		obj = service.update(obj);
 		//noContent conteudo vazio
 		return ResponseEntity.noContent().build();
