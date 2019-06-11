@@ -1,5 +1,6 @@
 package com.automacaopredial.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,19 +35,18 @@ public class DispositivoTipoService {
 												 Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
 	}
-/*	
-	public static DispositivoTipo toTipo(Integer cod) {
+	
+	public DispositivoTipo toTipo(Integer cod) {
 		
 		if(cod == null) return null;
 		
-		List<DispositivoTipo> tipos = new ArrayList<>(Arrays.asList(this.findAll()));
-		
+		List<DispositivoTipo> tipos = new ArrayList<>();
+		tipos = findAll();
 		for(DispositivoTipo t: tipos) {
 			if(cod.equals(t.getId())) {
 				return t;
 			}
 		}	
 		throw new IllegalArgumentException("Id inválido: " + cod);
-	}
-*/	
+	}	
 }

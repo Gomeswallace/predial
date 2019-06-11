@@ -46,6 +46,7 @@ public class UsuarioResource {
 	public ResponseEntity<Void> insert(@Valid @RequestBody UsuarioNewDTO objNewDTO){ //converte o obj em json
 		Usuario obj = service.fromDTO(objNewDTO);
 		//pega o id do novo recurso criado e add na url
+		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 					.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		

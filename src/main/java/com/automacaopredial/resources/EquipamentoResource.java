@@ -55,9 +55,9 @@ public class EquipamentoResource {
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value= "/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> Update(@Valid @RequestBody EquipamentoDTO objDTO, @PathVariable Integer id) {
-		Equipamento obj = service.fromDTO(objDTO);
-		obj.setId(id);
+	public ResponseEntity<Void> Update(@Valid @RequestBody EquipamentoNewDTO objNewDTO) {
+		Equipamento obj = service.fromDTO(objNewDTO);
+		//obj.setId(id);
 		obj = service.update(obj);
 		//noContent conteudo vazio
 		return ResponseEntity.noContent().build();

@@ -53,8 +53,8 @@ public class AmbienteResource {
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody AmbienteDTO objDTO, @PathVariable Integer id){
-		Ambiente obj = service.fromDTO(objDTO);
+	public ResponseEntity<Void> update(@Valid @RequestBody AmbienteNewDTO objNewDTO, @PathVariable Integer id){
+		Ambiente obj = service.fromDTO(objNewDTO);
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();

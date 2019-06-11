@@ -27,6 +27,7 @@ public class AmbienteNewDTO {
 	@NotNull(message="Preenchimento obrigatório")
 	private Integer equipamentoTipo;
 	
+	@NotNull(message="Preenchimento obrigatório")
 	private Integer dispositivoId;
 	
 	public AmbienteNewDTO() {

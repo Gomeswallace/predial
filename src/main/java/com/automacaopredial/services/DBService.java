@@ -51,7 +51,7 @@ public class DBService {
 		DispositivoTipo tipoDisp1 = new DispositivoTipo(null, "Arduino Due", 12, 54); 
 		DispositivoTipo tipoDisp2 = new DispositivoTipo(null, "Arduino Mega 2560", 16, 54);
 		
-		Dispositivo disp1 = new Dispositivo(null, "Dispositivo 1", "TESTE", tipoDisp1);
+		Dispositivo disp1 = new Dispositivo(null, "Dispositivo 1", "TESTE", tipoDisp1 );
 		Dispositivo disp2 = new Dispositivo(null, "Dispositivo 2", "TESTE 2", tipoDisp2);
 
 		Ambiente amb1 = new Ambiente(null, "Garagem", "Entrada 1", disp1);
@@ -66,8 +66,8 @@ public class DBService {
 		amb1.getEquipamentos().addAll(Arrays.asList(ep1));
 		amb2.getEquipamentos().addAll(Arrays.asList(ep2));
 		
-		dispositivoTipoRepository.saveAll(Arrays.asList(tipoDisp1, tipoDisp2));
 		usuarioRepository.saveAll(Arrays.asList(user1, user2));
+		dispositivoTipoRepository.saveAll(Arrays.asList(tipoDisp1, tipoDisp2));		
 		dispositivoRepository.saveAll(Arrays.asList(disp1, disp2));
 		ambienteRepository.saveAll(Arrays.asList(amb1, amb2));
 		equipamentoRepository.saveAll(Arrays.asList(ep1, ep2));	}

@@ -3,11 +3,14 @@ package com.automacaopredial.dto;
 import java.io.Serializable;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
 public class DispositivoNewDTO implements Serializable {	
 	private static final long serialVersionUID = 1L;
+	
+	private Integer id;
 	
 	@NotEmpty(message="Preenchimento obrigatório")
 	@Length(min=5, max=120, message="O tamanho deve ser entre 5 e 120 caracteres")
@@ -16,16 +19,25 @@ public class DispositivoNewDTO implements Serializable {
 	@Length(min=5, max=120, message="O tamanho deve ser entre 5 e 120 caracteres")
 	private String descricao;
 	
-	private Integer tipo;
+	@NotNull()
+	private Integer idTipo;
 	
-	@NotEmpty(message="Preenchimento obrigatório")
-	@Length(min=5, max=120, message="O tamanho deve ser entre 5 e 120 caracteres")
-	private String ambienteNome;
+	//private List<Ambiente> idAmbientes = new ArrayList<>();
 	
-	private String ambienteDescricao;
+	//private String ambienteNome;
+	
+	//private String ambienteDescricao;
 
 	public DispositivoNewDTO() {
 		
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -44,27 +56,20 @@ public class DispositivoNewDTO implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Integer getTipo() {
-		return tipo;
+	public Integer getIdTipo() {
+		return idTipo;
 	}
 
-	public void setTipo(Integer tipo) {
-		this.tipo = tipo;
+	public void setIdTipo(Integer idTipo) {
+		this.idTipo = idTipo;
+	}
+/*
+	public List<Ambiente> getIdAmbientes() {
+		return idAmbientes;
 	}
 
-	public String getAmbienteNome() {
-		return ambienteNome;
+	public void setIdAmbientes(List<Ambiente> idAmbientes) {
+		this.idAmbientes = idAmbientes;
 	}
-
-	public void setAmbienteNome(String ambienteNome) {
-		this.ambienteNome = ambienteNome;
-	}
-
-	public String getAmbienteDescricao() {
-		return ambienteDescricao;
-	}
-
-	public void setAmbienteDescricao(String ambienteDescricao) {
-		this.ambienteDescricao = ambienteDescricao;
-	}	
+*/
 }

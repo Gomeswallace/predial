@@ -12,8 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.automacaopredial.domain.Ambiente;
 import com.automacaopredial.domain.Dispositivo;
-import com.automacaopredial.domain.Equipamento;
-import com.automacaopredial.domain.enums.TipoEquipamento;
 import com.automacaopredial.dto.AmbienteDTO;
 import com.automacaopredial.dto.AmbienteNewDTO;
 import com.automacaopredial.repositories.AmbienteRepository;
@@ -34,6 +32,9 @@ public class AmbienteService {
 	@Autowired
 	private DispositivoRepository dispositivoRepository;
 	
+	@Autowired
+	private DispositivoService dispositivoService;
+	
 	public Ambiente find(Integer id) {
 		Optional<Ambiente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
@@ -49,8 +50,11 @@ public class AmbienteService {
 	}
 	
 	public Ambiente update(Ambiente obj) {
-		Ambiente newObj = find(obj.getId()); //verifica se o obj existe antes de tentar atualizar
+		Ambiente newObj = find(obj.getId()); //verifica se o obj existe antes de tentar atualizar		
 		updateData(newObj, obj); //Criado o metodo para tratar quais os dados podem ser atualizados
+		
+		//Dispositivo disp = dispositivoService.find(newObj.getId());
+		//disp.getAmbientes().add(newObj);
 		return repo.save(newObj);
 	}
 	
@@ -73,8 +77,16 @@ public class AmbienteService {
 		return repo.findAll(pageRequest);
 	}
 	
-	public Page<Ambiente> search(String nome, Integer id, Integer page, Integer linesPerPage, String orderBy, String direction) {
-		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+	public Page<Ambiente> search(String nome, 
+								 Integer id, 
+								 Integer page, 
+								 Integer linesPerPage, 
+								 String orderBy, 
+								 String direction) {
+		PageRequest pageRequest = PageRequest.of(page, 
+												 linesPerPage, 
+												 Direction.valueOf(direction), 
+												 orderBy);
 		Optional<Dispositivo> dispositivo = dispositivoRepository.findById(id);
 		return repo.search(nome, dispositivo, pageRequest);	
 	}
@@ -84,11 +96,15 @@ public class AmbienteService {
 	}
 	
 	public Ambiente fromDTO(AmbienteNewDTO objNewDTO) {
-		Dispositivo disp = new Dispositivo(objNewDTO.getDispositivoId(), null, null, null);
+		//Dispositivo disp = new Dispositivo(objNewDTO.getDispositivoId(), null, null, null);
+		Dispositivo disp = dispositivoService.find(objNewDTO.getDispositivoId());
 		Ambiente amb = new Ambiente(null, objNewDTO.getNome(), objNewDTO.getDescricao(), disp);
-		Equipamento equip = new Equipamento(null, objNewDTO.getEquipamentoNome(), objNewDTO.getEquipamentoPorta(),
-				objNewDTO.isEquipamentoStatus(), TipoEquipamento.toEnum(objNewDTO.getEquipamentoTipo()), amb);
-		amb.getEquipamentos().add(equip);
+		
+		//Equipamento equip = new Equipamento(null, objNewDTO.getEquipamentoNome(), objNewDTO.getEquipamentoPorta(),
+		//		objNewDTO.isEquipamentoStatus(), TipoEquipamento.toEnum(objNewDTO.getEquipamentoTipo()), amb);
+		//amb.getEquipamentos().add(equip);
+		
+		//disp.getAmbientes().add(amb);
 		return amb;
 	}
 	

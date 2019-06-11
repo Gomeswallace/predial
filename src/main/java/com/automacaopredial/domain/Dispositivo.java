@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -19,11 +21,14 @@ public class Dispositivo implements Serializable{
 	private Integer id;
 	private String nome;
 	private String descricao;
-	private Integer tipo;
+	
+	@ManyToOne
+	@JoinColumn(name = "dispositivoTipo_id")
+	private DispositivoTipo tipo;
 	
 	@OneToMany(mappedBy = "dispositivo")
 	private List<Ambiente> ambientes = new ArrayList<>(); 
-
+	
 	public Dispositivo() {		
 	}
 	
@@ -32,7 +37,7 @@ public class Dispositivo implements Serializable{
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
-		this.tipo = (tipo == null) ? null : tipo.getId();
+		this.tipo = tipo;
 	}
 
 	public Integer getId() {
@@ -59,11 +64,11 @@ public class Dispositivo implements Serializable{
 		this.descricao = descricao;
 	}
 	
-	public Integer getTipo() {
+	public DispositivoTipo getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(Integer tipo) {
+	public void setTipo(DispositivoTipo tipo) {
 		this.tipo = tipo;
 	}
 	

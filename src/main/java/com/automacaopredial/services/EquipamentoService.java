@@ -28,6 +28,9 @@ public class EquipamentoService {
 	
 	@Autowired
 	public AmbienteRepository ambienteRepository;
+	
+	@Autowired
+	public AmbienteService ambienteService;
 
 	public Equipamento find(Integer id) {
 		Optional<Equipamento> obj = repo.findById(id);
@@ -78,9 +81,14 @@ public class EquipamentoService {
 	}
 	
 	public Equipamento fromDTO(EquipamentoNewDTO objNewDTO) {
-		Ambiente amb = new Ambiente(objNewDTO.getAmbienteId(), null, null, null);
+		Ambiente amb = ambienteService.find(objNewDTO.getAmbienteId());
 		Equipamento equip = new Equipamento(null, objNewDTO.getNome(), objNewDTO.getPorta(),
 					objNewDTO.isStatus(), TipoEquipamento.toEnum(objNewDTO.getTipo()), amb);
+		
+		//Equipamento equip = new Equipamento(null, objNewDTO.getEquipamentoNome(), objNewDTO.getEquipamentoPorta(),
+				//		objNewDTO.isEquipamentoStatus(), TipoEquipamento.toEnum(objNewDTO.getEquipamentoTipo()), amb);
+		amb.getEquipamentos().add(equip);
+
 		return equip;
 	}
 	

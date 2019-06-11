@@ -1,11 +1,14 @@
 package com.automacaopredial.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import com.automacaopredial.domain.enums.TipoDispositivo;
 
@@ -19,6 +22,9 @@ public class DispositivoTipo implements Serializable{
 	private String nome;
 	private Integer quantidadePortasAnalog;
 	private Integer quantidadePortasDig;
+	
+	@OneToMany(mappedBy = "tipo")
+	private List<Dispositivo> dispositivos = new ArrayList<>();
 	
 	public DispositivoTipo() {		
 	}

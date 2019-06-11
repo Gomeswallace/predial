@@ -7,6 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import com.automacaopredial.domain.Dispositivo;
+import com.automacaopredial.domain.DispositivoTipo;
 
 public class DispositivoDTO implements Serializable {	
 	private static final long serialVersionUID = 1L;
@@ -16,6 +17,7 @@ public class DispositivoDTO implements Serializable {
 	@Length(min=5, message="O tamanho deve ser mínimo de 5 caracteres.")
 	private String nome;
 	private String descricao;
+	private DispositivoTipo dispositivoTipo;
 	
 	public DispositivoDTO() {
 		
@@ -25,6 +27,7 @@ public class DispositivoDTO implements Serializable {
 		id = obj.getId();
 		nome = obj.getNome();
 		descricao = obj.getDescricao();
+		dispositivoTipo = obj.getTipo();
 	}
 
 	public Integer getId() {
@@ -49,5 +52,13 @@ public class DispositivoDTO implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public DispositivoTipo getDispositivoTipo() {
+		return dispositivoTipo;
+	}
+
+	public void setDispositivoTipo(DispositivoTipo dispositivoTipo) {
+		this.dispositivoTipo = dispositivoTipo;
 	}
 }

@@ -10,12 +10,9 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.automacaopredial.domain.Ambiente;
 import com.automacaopredial.domain.Dispositivo;
-import com.automacaopredial.domain.DispositivoTipo;
 import com.automacaopredial.dto.DispositivoDTO;
 import com.automacaopredial.dto.DispositivoNewDTO;
-import com.automacaopredial.repositories.AmbienteRepository;
 import com.automacaopredial.repositories.DispositivoRepository;
 import com.automacaopredial.services.exceptions.DataIntegrityException;
 import com.automacaopredial.services.exceptions.ObjectNotFoundException;
@@ -26,11 +23,11 @@ public class DispositivoService {
 	@Autowired
 	private DispositivoRepository repo;
 	
-	@Autowired
-	private AmbienteRepository ambienteRepository;
-	
 	//@Autowired
-	//private DispositivoTipoService dispositivoTipoService; 
+	//private AmbienteService ambienteService;
+	
+	@Autowired
+	private DispositivoTipoService dispositivoTipoService; 
 	
 	@Autowired
 	private EmailService emailService; 
@@ -45,7 +42,7 @@ public class DispositivoService {
 	public Dispositivo insert(Dispositivo obj) {
 		obj.setId(null); //id null para garantir a insercao		
 		repo.save(obj); //utiliza os metodos do spring data
-		ambienteRepository.saveAll(obj.getAmbientes());
+		//ambienteService.saveAll(obj.getAmbientes());
 		emailService.sendOrderConfirmationEmail(obj);
 		return obj;
 	}
@@ -69,26 +66,51 @@ public class DispositivoService {
 		return repo.findAll();
 	}
 	
-	public Page<Dispositivo> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
-		PageRequest pageRequest = PageRequest.of(page, linesPerPage, 
-												 Direction.valueOf(direction), orderBy);
+	public Page<Dispositivo> findPage(Integer page, 
+									  Integer linesPerPage, 
+									  String orderBy, 
+									  String direction){
+		
+		PageRequest pageRequest = PageRequest.of(page, 
+												 linesPerPage, 
+												 Direction.valueOf(direction), 
+												 orderBy);
 		return repo.findAll(pageRequest);
 	}
 	
 	public Dispositivo fromDTO(DispositivoDTO objDTO) {
-			return new Dispositivo(objDTO.getId(), objDTO.getNome(), objDTO.getDescricao(), null);
+			return new Dispositivo(objDTO.getId(),
+								   objDTO.getNome(),
+								   objDTO.getDescricao(),
+								   null);
 	}
 	
-	public Dispositivo fromDTO(DispositivoNewDTO objnewDTO, DispositivoTipo tipo) {
-		Dispositivo disp = new Dispositivo(null, objnewDTO.getNome(), objnewDTO.getDescricao(), tipo);     
-											//DispositivoTipoService.toTipo(objnewDTO.getTipo()));
-		Ambiente amb = new Ambiente(null, objnewDTO.getAmbienteNome(), objnewDTO.getAmbienteDescricao(), disp);
-		disp.getAmbientes().add(amb);
+	public Dispositivo fromDTO(DispositivoNewDTO objnewDTO) {
+		Dispositivo disp = new Dispositivo(null, 
+										   objnewDTO.getNome(), 
+										   objnewDTO.getDescricao(), 
+										   dispositivoTipoService.toTipo(objnewDTO.getIdTipo()));
+		
+		/*List<Ambiente> amb = new ArrayList<>();
+		if(!objnewDTO.getIdAmbientes().isEmpty()) {			
+			amb = (List<Ambiente>) ambienteService.search("", objnewDTO.getId(), 0, 24,"nome","ASC");	
+		}
+		
+		disp.getAmbientes().addAll(amb);
+		*/
 		return disp;
 	}	
 	
 	private void updateData(Dispositivo newObj, Dispositivo obj) {
 		newObj.setNome(obj.getNome());
 		newObj.setDescricao(obj.getDescricao());
+	}
+
+	public DispositivoTipoService getDispositivoTipoService() {
+		return dispositivoTipoService;
+	}
+
+	public void setDispositivoTipoService(DispositivoTipoService dispositivoTipoService) {
+		this.dispositivoTipoService = dispositivoTipoService;
 	}
 }

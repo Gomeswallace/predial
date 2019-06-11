@@ -31,6 +31,4 @@ public class TestConfig {
 		//MockEmailservice chama o servico que grava o e-mail no log
 		return new MockEmailService();
 	}	
-	
-	
 }

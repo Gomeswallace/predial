@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.automacaopredial.domain.Dispositivo;
-import com.automacaopredial.domain.DispositivoTipo;
 import com.automacaopredial.dto.DispositivoDTO;
 import com.automacaopredial.dto.DispositivoNewDTO;
 import com.automacaopredial.services.DispositivoService;
@@ -39,8 +38,8 @@ public class DispositivoResource {
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody DispositivoNewDTO objnewDTO, @Valid @RequestBody DispositivoTipo tipo){ //converte o obj em json
-		Dispositivo obj = service.fromDTO(objnewDTO, tipo);
+	public ResponseEntity<Void> insert(@Valid @RequestBody DispositivoNewDTO objnewDTO){ //, @Valid @RequestBody DispositivoTipo tipo){ //converte o obj em json
+		Dispositivo obj = service.fromDTO(objnewDTO);
 		obj = service.insert(obj);
 		//pega o id do novo recurso criado e add na url
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -52,17 +51,18 @@ public class DispositivoResource {
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody DispositivoDTO objDTO, @PathVariable Integer id){
-		Dispositivo obj = service.fromDTO(objDTO);
-		objDTO.setId(id);
+	public ResponseEntity<Void> update(@Valid @RequestBody DispositivoNewDTO objNewDTO, @PathVariable Integer id){
+		Dispositivo obj = service.fromDTO(objNewDTO);
+		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
 	}
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public ResponseEntity<Void> delete(@PathVariable Integer id) {
-		service.delete(id);
+	public ResponseEntity<Void> delete(@PathVariable String id) {
+		Integer _id = Integer.parseInt(id);
+		service.delete(_id);
 		
 		return ResponseEntity.noContent().build();					
 	}	

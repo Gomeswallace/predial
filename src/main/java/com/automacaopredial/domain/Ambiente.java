@@ -35,12 +35,12 @@ public class Ambiente implements Serializable{
 	public Ambiente() {
 	}
 	
-	public Ambiente(Integer id, String nome, String descricao, Dispositivo dispositivo) {
+	public Ambiente(Integer id, String nome, String descricao, Dispositivo disp) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
-		this.dispositivo = (dispositivo == null) ? null : dispositivo;
+		this.dispositivo = (disp == null) ? null : disp;
 	}
 
 	public Integer getId() {
