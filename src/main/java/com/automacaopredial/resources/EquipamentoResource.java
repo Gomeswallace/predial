@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +20,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.automacaopredial.domain.Equipamento;
 import com.automacaopredial.dto.EquipamentoDTO;
 import com.automacaopredial.dto.EquipamentoNewDTO;
-import com.automacaopredial.resources.utils.URL;
 import com.automacaopredial.services.EquipamentoService;
 
 @RestController
@@ -79,19 +77,20 @@ public class EquipamentoResource {
 	}
 	
 	@RequestMapping(value="/page", method=RequestMethod.GET)
-	public ResponseEntity<Page<EquipamentoDTO>> findPage(
+	public ResponseEntity<List<EquipamentoDTO>> findPage(
 			//requestParam informa que o parametro é opcional
-			 @RequestParam(value="nome", defaultValue="") String nome,
-			 @RequestParam(value="ambiente", defaultValue="") String ambiente,
-			 @RequestParam(value="page", defaultValue="0")  Integer page, 
-			 @RequestParam(value="linesPerPage", defaultValue="4") Integer linesPerPage, 
-			 @RequestParam(value="orderBy", defaultValue="nome") String orderBy, 
-			 @RequestParam(value="direction", defaultValue="ASC") String direction){
-		String nomeDecoded = URL.decodeParam(nome);
+			// @RequestParam(value="nome", defaultValue="") String nome,
+			 @RequestParam(value="ambiente", defaultValue="") String ambiente)
+			//@RequestParam(value="page", defaultValue="0")  Integer page, 
+			//@RequestParam(value="linesPerPage", defaultValue="4") Integer linesPerPage, 
+			//@RequestParam(value="orderBy", defaultValue="nome") String orderBy, 
+			//@RequestParam(value="direction", defaultValue="ASC") String direction)
+	{
+		//String nomeDecoded = URL.decodeParam(nome);
 		//List<Integer> ids = URL.decodeIntList(dispositivos);
 		Integer id = Integer.parseInt(ambiente);
-		Page<Equipamento> list = service.search(nomeDecoded, id, page, linesPerPage, orderBy, direction);
-		Page<EquipamentoDTO> listDTO = list.map(obj -> new EquipamentoDTO(obj));
+		List<Equipamento> list = service.search(id);
+		List<EquipamentoDTO> listDTO = list.stream().map(obj -> new EquipamentoDTO(obj)).collect(Collectors.toList());
 		
 		//Page<Equipamento> list = service.findPage(page, linesPerPage, orderBy, direction);
 		//lista de dto para o stream converter cada obj em dto pela funcao anonima e depois retornar essa lista

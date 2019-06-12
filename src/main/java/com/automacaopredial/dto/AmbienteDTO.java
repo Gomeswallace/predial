@@ -33,6 +33,7 @@ public class AmbienteDTO implements Serializable{
 		id = obj.getId();
 		nome = obj.getNome();
 		descricao = obj.getDescricao();
+		dispositivoId = obj.getDispositivo().getId();
 	}
 
 	public Integer getId() {

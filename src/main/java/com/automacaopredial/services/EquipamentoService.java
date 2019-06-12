@@ -70,10 +70,8 @@ public class EquipamentoService {
 		return repo.findAll(pageRequest);
 	}
 	
-	public Page<Equipamento> search(String nome, Integer id, Integer page, Integer linesPerPage, String orderBy, String direction) {
-		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		Optional<Ambiente> ambiente = ambienteRepository.findById(id);
-		return repo.search(nome, ambiente, pageRequest);	
+	public List<Equipamento> search(Integer id) {		
+		return repo.search(id);	
 	}
 	
 	public Equipamento fromDTO(EquipamentoDTO objDTO) {

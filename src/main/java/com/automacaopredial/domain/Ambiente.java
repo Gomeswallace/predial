@@ -75,6 +75,14 @@ public class Ambiente implements Serializable{
 		this.equipamentos = equipamentos;
 	}
 
+	public Dispositivo getDispositivo() {
+		return dispositivo;
+	}
+
+	public void setDispositivo(Dispositivo dispositivo) {
+		this.dispositivo = dispositivo;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
