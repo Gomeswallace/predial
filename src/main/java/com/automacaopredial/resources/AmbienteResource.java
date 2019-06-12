@@ -32,8 +32,7 @@ public class AmbienteResource {
 	private AmbienteService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<Ambiente> find(@PathVariable Integer id) {
-		
+	public ResponseEntity<Ambiente> find(@PathVariable Integer id) {		
 		Ambiente obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}

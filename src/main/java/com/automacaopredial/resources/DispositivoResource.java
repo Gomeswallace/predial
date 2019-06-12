@@ -38,7 +38,7 @@ public class DispositivoResource {
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody DispositivoNewDTO objnewDTO){ //, @Valid @RequestBody DispositivoTipo tipo){ //converte o obj em json
+	public ResponseEntity<Void> insert(@Valid @RequestBody DispositivoNewDTO objnewDTO){ //converte o obj em json
 		Dispositivo obj = service.fromDTO(objnewDTO);
 		obj = service.insert(obj);
 		//pega o id do novo recurso criado e add na url
@@ -60,10 +60,8 @@ public class DispositivoResource {
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public ResponseEntity<Void> delete(@PathVariable String id) {
-		Integer _id = Integer.parseInt(id);
-		service.delete(_id);
-		
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+		service.delete(id);
 		return ResponseEntity.noContent().build();					
 	}	
 	
