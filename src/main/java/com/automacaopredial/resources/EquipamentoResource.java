@@ -96,5 +96,5 @@ public class EquipamentoResource {
 		//lista de dto para o stream converter cada obj em dto pela funcao anonima e depois retornar essa lista
 		//Page<EquipamentoDTO> listDTO = list.map(obj -> new EquipamentoDTO(obj));
 		return ResponseEntity.ok().body(listDTO);
-	}
+	}	
 }

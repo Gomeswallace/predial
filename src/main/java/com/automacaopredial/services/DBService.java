@@ -42,7 +42,7 @@ public class DBService {
 	
 	public void instantiateTestDataBase() {
 			
-		Usuario user1 = new Usuario(null, "Wallace", "g@g.com", pe.encode("123"));
+		Usuario user1 = new Usuario(null, "Wallace", "a@g.com", pe.encode("1"));
 		user1.addTipoUsuario(TipoUsuario.ADMIN);
 		
 		Usuario user2 = new Usuario(null, "Maria", "maria@email.com", pe.encode("123"));
@@ -55,16 +55,28 @@ public class DBService {
 		Dispositivo disp2 = new Dispositivo(null, "Dispositivo 2", "TESTE 2", tipoDisp2);
 
 		Ambiente amb1 = new Ambiente(null, "Garagem", "Entrada 1", disp1);
-		Ambiente amb2 = new Ambiente(null, "Area de serviço", "Lavanderia", disp2);
+		Ambiente amb2 = new Ambiente(null, "DOIS", "Entrada 1", disp1);
+		Ambiente amb3 = new Ambiente(null, "TRES", "Entrada 1", disp1);
+		Ambiente amb4 = new Ambiente(null, "QUATRO", "Entrada 1", disp1);
+		Ambiente amb5 = new Ambiente(null, "CINCO", "Entrada 1", disp1);
+		Ambiente amb6 = new Ambiente(null, "SEIS", "Entrada 1", disp1);
+		Ambiente amb7 = new Ambiente(null, "SETE", "Entrada 1", disp1);
+		Ambiente amb8 = new Ambiente(null, "OITO", "Entrada 1", disp1);
+		Ambiente amb9 = new Ambiente(null, "NOVE", "Entrada 1", disp1);
+		Ambiente amb10 = new Ambiente(null, "DEZ", "Entrada 1", disp1);
+		Ambiente amb11 = new Ambiente(null, "Area de serviço", "Lavanderia", disp2);
 		
-		disp1.getAmbientes().addAll(Arrays.asList(amb1));
-		disp2.getAmbientes().addAll(Arrays.asList(amb2));
+		disp1.getAmbientes().addAll(Arrays.asList(amb1, amb2, amb3, amb4, amb5, amb6, amb7, amb8, amb9, amb10));
+		disp2.getAmbientes().addAll(Arrays.asList(amb11));
 		
-		Equipamento ep1 = new Equipamento(1,"Equipamento 1", 2, true, TipoEquipamento.LAMPADA, amb1);
-		Equipamento ep2 = new Equipamento(2,"Equipamento 2", 3, true, TipoEquipamento.RADIO, amb2);				
+		Equipamento ep1 = new Equipamento(null,"Equipamento 1", 2, true, TipoEquipamento.LAMPADA, amb1);
+		Equipamento ep2 = new Equipamento(null,"Equipamento 2", 3, true, TipoEquipamento.RADIO, amb1);
+		Equipamento ep3 = new Equipamento(null, "Equipamento 3", 4, true, TipoEquipamento.RADIO, amb2);
+		Equipamento ep4 = new Equipamento(null,"Equipamento 4", 5, true, TipoEquipamento.RADIO, amb3);
 						
-		amb1.getEquipamentos().addAll(Arrays.asList(ep1));
-		amb2.getEquipamentos().addAll(Arrays.asList(ep2));
+		amb1.getEquipamentos().addAll(Arrays.asList(ep1, ep2));
+		amb2.getEquipamentos().addAll(Arrays.asList(ep3));
+		amb3.getEquipamentos().addAll(Arrays.asList(ep4));
 		
 		usuarioRepository.saveAll(Arrays.asList(user1, user2));
 		dispositivoTipoRepository.saveAll(Arrays.asList(tipoDisp1, tipoDisp2));		

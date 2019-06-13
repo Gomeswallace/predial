@@ -16,6 +16,5 @@ public interface EquipamentoRepository extends JpaRepository<Equipamento, Intege
 	@Transactional(readOnly=true)
 	@Query("SELECT obj FROM Equipamento obj WHERE obj.ambiente.id = :ambienteId ORDER BY obj.nome")
 	public List<Equipamento> search(@Param("ambienteId") Integer ambiente_id);
-	//findDistinctByNomeContainingAndDispositivo_IdIn
-	
+	//findDistinctByNomeContainingAndDispositivo_IdIn	
 }
