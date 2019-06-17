@@ -26,7 +26,7 @@ import com.automacaopredial.services.EquipamentoService;
 @RequestMapping(value="/equipamentos")
 public class EquipamentoResource {
 	
-	@Autowired //instanciar o objeto automaticamente
+	@Autowired
 	private EquipamentoService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
@@ -88,7 +88,7 @@ public class EquipamentoResource {
 	{
 		//String nomeDecoded = URL.decodeParam(nome);
 		//List<Integer> ids = URL.decodeIntList(dispositivos);
-		Integer id = Integer.parseInt(ambiente);
+		Integer id = Integer.parseInt(ambiente); 
 		List<Equipamento> list = service.search(id);
 		List<EquipamentoDTO> listDTO = list.stream().map(obj -> new EquipamentoDTO(obj)).collect(Collectors.toList());
 		

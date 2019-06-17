@@ -14,7 +14,7 @@ import com.automacaopredial.domain.Equipamento;
 public interface EquipamentoRepository extends JpaRepository<Equipamento, Integer>{
 	
 	@Transactional(readOnly=true)
-	@Query("SELECT obj FROM Equipamento obj WHERE obj.ambiente.id = :ambienteId ORDER BY obj.nome")
+	@Query("SELECT obj FROM Equipamento obj WHERE obj.ambiente.id = :ambienteId")
 	public List<Equipamento> search(@Param("ambienteId") Integer ambiente_id);
-	//findDistinctByNomeContainingAndDispositivo_IdIn	
+	//public List<Equipamento> findDistinctByNomeContainingAndAmbinete_IdIn(Integer id);	
 }

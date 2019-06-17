@@ -14,8 +14,7 @@ import com.automacaopredial.domain.Ambiente;
 public interface AmbienteRepository extends JpaRepository<Ambiente, Integer>{
 
 	@Transactional(readOnly=true)
-	@Query("SELECT obj FROM Ambiente obj WHERE obj.dispositivo.id = :dispositivoId ORDER BY obj.nome")
+	@Query("SELECT obj FROM Ambiente obj WHERE obj.dispositivo.id = :dispositivoId ORDER BY obj.id")
 	public List<Ambiente> search(@Param("dispositivoId") Integer dispositivo_id);
 	//findDistinctByNomeContainingAndDispositivo_IdIn
 }
-

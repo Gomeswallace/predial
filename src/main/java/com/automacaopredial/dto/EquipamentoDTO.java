@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.automacaopredial.domain.Ambiente;
 import com.automacaopredial.domain.Equipamento;
 
 public class EquipamentoDTO implements Serializable{	
@@ -27,6 +28,9 @@ public class EquipamentoDTO implements Serializable{
 	@NotNull(message="Preenchimento obrigatório.")
 	private Integer tipo;
 	
+	@NotNull(message="Preenchimento obrigatório.")
+	private Ambiente ambiente;
+	
 	public EquipamentoDTO() {
 		
 	}
@@ -37,6 +41,7 @@ public class EquipamentoDTO implements Serializable{
 		porta = obj.getPorta();
 		status = obj.isStatus();
 		tipo = obj.getTipo();
+		ambiente = obj.getAmbiente();
 	}
 
 	public Integer getId() {
@@ -77,5 +82,13 @@ public class EquipamentoDTO implements Serializable{
 
 	public void setTipo(Integer tipo) {
 		this.tipo = tipo;
+	}
+
+	public Ambiente getAmbiente() {
+		return ambiente;
+	}
+
+	public void setAmbiente(Ambiente ambiente) {
+		this.ambiente = ambiente;
 	}
 }

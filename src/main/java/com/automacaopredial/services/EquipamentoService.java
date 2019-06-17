@@ -89,5 +89,6 @@ public class EquipamentoService {
 		newObj.setNome(obj.getNome());
 		newObj.setPorta(obj.getPorta());
 		newObj.setStatus(obj.isStatus());
+		newObj.setAmbiente(obj.getAmbiente());
 	}
 }
