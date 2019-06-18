@@ -10,13 +10,14 @@ import com.automacaopredial.domain.Ambiente;
 import com.automacaopredial.domain.Dispositivo;
 import com.automacaopredial.domain.DispositivoTipo;
 import com.automacaopredial.domain.Equipamento;
+import com.automacaopredial.domain.EquipamentoTipo;
 import com.automacaopredial.domain.Usuario;
-import com.automacaopredial.domain.enums.TipoEquipamento;
 import com.automacaopredial.domain.enums.TipoUsuario;
 import com.automacaopredial.repositories.AmbienteRepository;
 import com.automacaopredial.repositories.DispositivoRepository;
 import com.automacaopredial.repositories.DispositivoTipoRepository;
 import com.automacaopredial.repositories.EquipamentoRepository;
+import com.automacaopredial.repositories.EquipamentoTipoRepository;
 import com.automacaopredial.repositories.UsuarioRepository;
 
 @Service
@@ -39,6 +40,9 @@ public class DBService {
 	
 	@Autowired
 	private DispositivoTipoRepository dispositivoTipoRepository;
+	
+	@Autowired
+	private EquipamentoTipoRepository equipamentoTipoRepository;
 	
 	public void instantiateTestDataBase() {
 			
@@ -69,18 +73,26 @@ public class DBService {
 		disp1.getAmbientes().addAll(Arrays.asList(amb1, amb2, amb3, amb4, amb5, amb6, amb7, amb8, amb9, amb10));
 		disp2.getAmbientes().addAll(Arrays.asList(amb11));
 		
-		Equipamento ep1 = new Equipamento(null,"Equipamento 1", 2, true, TipoEquipamento.LAMPADA, amb1);
-		Equipamento ep2 = new Equipamento(null,"Equipamento 2", 3, true, TipoEquipamento.RADIO, amb1);
-		Equipamento ep3 = new Equipamento(null, "Equipamento 3", 4, true, TipoEquipamento.RADIO, amb2);
-		Equipamento ep4 = new Equipamento(null,"Equipamento 4", 5, true, TipoEquipamento.RADIO, amb3);
-						
+		EquipamentoTipo eTipo1 = new EquipamentoTipo(null, "Tomada");
+		EquipamentoTipo eTipo2 = new EquipamentoTipo(null, "Lampada");
+		EquipamentoTipo eTipo3 = new EquipamentoTipo(null, "Televisão");
+		EquipamentoTipo eTipo4 = new EquipamentoTipo(null, "Radio");
+		EquipamentoTipo eTipo5 = new EquipamentoTipo(null, "Ventilador");
+		
+		Equipamento ep1 = new Equipamento(null,"Equipamento 1", 2, true, eTipo1, amb1);
+		Equipamento ep2 = new Equipamento(null,"Equipamento 2", 3, true, eTipo2, amb1);
+		Equipamento ep3 = new Equipamento(null, "Equipamento 3", 4, true, eTipo3, amb2);
+		Equipamento ep4 = new Equipamento(null,"Equipamento 4", 5, true, eTipo4, amb3);
+		Equipamento ep5 = new Equipamento(null,"Equipamento 5", 1, true, eTipo5, amb3);
+		
 		amb1.getEquipamentos().addAll(Arrays.asList(ep1, ep2));
 		amb2.getEquipamentos().addAll(Arrays.asList(ep3));
-		amb3.getEquipamentos().addAll(Arrays.asList(ep4));
+		amb3.getEquipamentos().addAll(Arrays.asList(ep4, ep5));
 		
 		usuarioRepository.saveAll(Arrays.asList(user1, user2));
 		dispositivoTipoRepository.saveAll(Arrays.asList(tipoDisp1, tipoDisp2));		
 		dispositivoRepository.saveAll(Arrays.asList(disp1, disp2));
-		ambienteRepository.saveAll(Arrays.asList(amb1, amb2));
-		equipamentoRepository.saveAll(Arrays.asList(ep1, ep2));	}
+		ambienteRepository.saveAll(Arrays.asList(amb1, amb2, amb3, amb4, amb5, amb6, amb7, amb8, amb9, amb10));
+		equipamentoTipoRepository.saveAll(Arrays.asList(eTipo1, eTipo2, eTipo3, eTipo4, eTipo5));
+		equipamentoRepository.saveAll(Arrays.asList(ep1, ep2, ep3, ep4));	}
 }

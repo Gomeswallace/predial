@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.automacaopredial.domain.enums.TipoEquipamento;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -22,7 +21,10 @@ public class Equipamento implements Serializable {
 	private String nome;
 	private Integer porta;
 	private boolean status;
-	private Integer tipo;
+	
+	@ManyToOne
+	@JoinColumn(name = "equipamentoTipo_id")
+	private EquipamentoTipo tipo;
 		
 	@JsonIgnore
 	@ManyToOne
@@ -32,12 +34,12 @@ public class Equipamento implements Serializable {
 	public Equipamento() {		
 	}
 
-	public Equipamento(Integer id, String nome, Integer porta, boolean status, TipoEquipamento tipoEquipamento, Ambiente ambiente) {
+	public Equipamento(Integer id, String nome, Integer porta, boolean status, EquipamentoTipo tipoEquipamento, Ambiente ambiente) {
 		this.id = id;
 		this.nome = nome;
 		this.porta = porta;
 		this.status = status;
-		this.tipo = (tipoEquipamento == null) ? null : tipoEquipamento.getCod();
+		this.tipo = tipoEquipamento;
 		this.ambiente = ambiente;
 	}
 		
@@ -65,21 +67,21 @@ public class Equipamento implements Serializable {
 		this.status = status;
 	}
 	
-	public Integer getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(TipoEquipamento tipo) {
-		this.tipo = tipo.getCod();
-	}
-
 	public Integer getPorta() {
 		return porta;
 	}
 
 	public void setPorta(Integer porta) {
 		this.porta = porta;
-	}	
+	}
+	
+	public EquipamentoTipo getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(EquipamentoTipo tipo) {
+		this.tipo = tipo;
+	}
 
 	public Ambiente getAmbiente() {
 		return ambiente;

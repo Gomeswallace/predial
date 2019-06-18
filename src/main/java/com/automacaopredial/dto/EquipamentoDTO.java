@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.Length;
 
 import com.automacaopredial.domain.Ambiente;
 import com.automacaopredial.domain.Equipamento;
+import com.automacaopredial.domain.EquipamentoTipo;
 
 public class EquipamentoDTO implements Serializable{	
 	private static final long serialVersionUID = 1L;
@@ -26,7 +27,7 @@ public class EquipamentoDTO implements Serializable{
 	private boolean status;
 	
 	@NotNull(message="Preenchimento obrigatório.")
-	private Integer tipo;
+	private EquipamentoTipo tipo;
 	
 	@NotNull(message="Preenchimento obrigatório.")
 	private Ambiente ambiente;
@@ -76,11 +77,11 @@ public class EquipamentoDTO implements Serializable{
 		this.status = status;
 	}
 
-	public Integer getTipo() {
+	public EquipamentoTipo getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(Integer tipo) {
+	public void setTipo(EquipamentoTipo tipo) {
 		this.tipo = tipo;
 	}
 

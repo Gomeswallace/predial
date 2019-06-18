@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.automacaopredial.domain.Ambiente;
 import com.automacaopredial.domain.Equipamento;
-import com.automacaopredial.domain.enums.TipoEquipamento;
 import com.automacaopredial.dto.EquipamentoDTO;
 import com.automacaopredial.dto.EquipamentoNewDTO;
 import com.automacaopredial.repositories.AmbienteRepository;
@@ -75,13 +74,22 @@ public class EquipamentoService {
 	}
 	
 	public Equipamento fromDTO(EquipamentoDTO objDTO) {
-			return new Equipamento(objDTO.getId(), objDTO.getNome(), objDTO.getPorta(), objDTO.isStatus(), TipoEquipamento.toEnum(objDTO.getTipo()),null);
+			return new Equipamento(objDTO.getId(), 
+								   objDTO.getNome(), 
+								   objDTO.getPorta(), 
+								   objDTO.isStatus(), 
+								   objDTO.getTipo(),
+								   null);
 	}
 	
 	public Equipamento fromDTO(EquipamentoNewDTO objNewDTO) {
 		Ambiente amb = ambienteService.find(objNewDTO.getAmbienteId());
-		Equipamento equip = new Equipamento(null, objNewDTO.getNome(), objNewDTO.getPorta(),
-								objNewDTO.isStatus(), TipoEquipamento.toEnum(objNewDTO.getTipo()), amb);
+		Equipamento equip = new Equipamento(null, 
+											objNewDTO.getNome(), 
+											objNewDTO.getPorta(),
+											objNewDTO.isStatus(), 
+											objNewDTO.getTipo(), 
+											amb);
 		return equip;
 	}
 	
