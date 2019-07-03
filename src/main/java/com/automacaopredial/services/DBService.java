@@ -46,7 +46,7 @@ public class DBService {
 	
 	public void instantiateTestDataBase() {
 			
-		Usuario user1 = new Usuario(null, "Wallace", "a@g.com", pe.encode("1"));
+		Usuario user1 = new Usuario(null, "Wallace", "a", pe.encode("1"));
 		user1.addTipoUsuario(TipoUsuario.ADMIN);
 		
 		Usuario user2 = new Usuario(null, "Maria", "maria@email.com", pe.encode("123"));

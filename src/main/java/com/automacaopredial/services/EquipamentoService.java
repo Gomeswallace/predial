@@ -30,6 +30,9 @@ public class EquipamentoService {
 	
 	@Autowired
 	public AmbienteService ambienteService;
+	
+	@Autowired
+	public EquipamentoTipoService equipamentoTipoService;
 
 	public Equipamento find(Integer id) {
 		Optional<Equipamento> obj = repo.findById(id);
@@ -88,7 +91,7 @@ public class EquipamentoService {
 											objNewDTO.getNome(), 
 											objNewDTO.getPorta(),
 											objNewDTO.isStatus(), 
-											objNewDTO.getTipo(), 
+											equipamentoTipoService.toTipo(objNewDTO.getIdtipo()),											
 											amb);
 		return equip;
 	}
@@ -97,6 +100,6 @@ public class EquipamentoService {
 		newObj.setNome(obj.getNome());
 		newObj.setPorta(obj.getPorta());
 		newObj.setStatus(obj.isStatus());
-		newObj.setAmbiente(obj.getAmbiente());
+		newObj.setTipo(obj.getTipo());
 	}
 }

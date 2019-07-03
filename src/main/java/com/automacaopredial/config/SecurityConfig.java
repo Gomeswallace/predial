@@ -47,6 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			"/dispositivos/**",
 			"/tiposdispositivos/**",
 			"/ambientes/**",
+			"/tiposequipamentos/**",
 			"/equipamentos/**",
 			"/usuarios/**"
 	};
