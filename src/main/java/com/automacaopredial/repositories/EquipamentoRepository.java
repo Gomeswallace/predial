@@ -16,5 +16,18 @@ public interface EquipamentoRepository extends JpaRepository<Equipamento, Intege
 	@Transactional(readOnly=true)
 	@Query("SELECT obj FROM Equipamento obj WHERE obj.ambiente.id = :ambienteId")
 	public List<Equipamento> search(@Param("ambienteId") Integer ambiente_id);
+	//public List<Equipamento> findDistinctByNomeContainingAndAmbinete_IdIn(Integer id);
+	
+
+	@Transactional(readOnly=true)
+	@Query("SELECT obj FROM Equipamento obj "
+			+ "INNER JOIN Ambiente AS amb "
+			+ "ON amb.id = obj.ambiente "
+			+ "INNER JOIN Dispositivo AS disp "  
+			+ "ON disp.id = amb.dispositivo "
+			+ "INNER JOIN DispositivoTipo AS tipo "		
+			+ "ON tipo.id = disp.tipo "
+			+ "WHERE obj.ambiente.id = :ambienteId")	
+	public List<Equipamento> searchTipo(@Param("ambienteId") Integer ambiente_id);
 	//public List<Equipamento> findDistinctByNomeContainingAndAmbinete_IdIn(Integer id);	
 }
