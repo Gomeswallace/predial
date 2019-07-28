@@ -76,6 +76,13 @@ public class EquipamentoService {
 		return repo.search(id);	
 	}
 	
+	public Integer findPortas(Integer id) {
+		Ambiente ambiente = ambienteService.find(id);
+		Integer qtdadePortas = ambiente.getQuantidadePortasDig();
+		
+		return qtdadePortas;	
+	}
+	
 	public Equipamento fromDTO(EquipamentoDTO objDTO) {
 			return new Equipamento(objDTO.getId(), 
 								   objDTO.getNome(), 

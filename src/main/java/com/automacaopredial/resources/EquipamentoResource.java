@@ -1,6 +1,7 @@
 package com.automacaopredial.resources;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -96,5 +97,30 @@ public class EquipamentoResource {
 		//lista de dto para o stream converter cada obj em dto pela funcao anonima e depois retornar essa lista
 		//Page<EquipamentoDTO> listDTO = list.map(obj -> new EquipamentoDTO(obj));
 		return ResponseEntity.ok().body(listDTO);
-	}	
+	}
+	
+	@RequestMapping(value="/findTipo", method=RequestMethod.GET)
+	public ResponseEntity<List<Integer>> findPortas(
+			@RequestParam(value="ambiente", defaultValue="") String ambiente_id){
+	
+		Integer id = Integer.parseInt(ambiente_id); 
+		int qtdadePortas = service.findPortas(id);
+		ArrayList<Integer> listPortas = new ArrayList<>();
+		
+		for(int i=0; i<= qtdadePortas; i++) {
+			listPortas.add(i);
+		}
+
+		List<Equipamento> listEquipamentos = service.search(id);
+		
+		for(int dispPorta=0; dispPorta < listPortas.size(); dispPorta++) {
+			for(int eqPorta=0; eqPorta < listEquipamentos.size(); eqPorta++) {
+				if(listPortas.get(dispPorta) == listEquipamentos.get(eqPorta).getPorta()) {
+					listPortas.remove(dispPorta);
+				}
+			}
+		}
+
+	return ResponseEntity.ok().body(listPortas);
+	}
 }

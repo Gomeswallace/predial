@@ -30,6 +30,9 @@ public class AmbienteNewDTO {
 	@NotNull(message="Preenchimento obrigatório")
 	private Integer dispositivoId;
 	
+	//@NotNull(message="Preenchimento obrigatório")
+	//private int quantidadePortasDig;
+	
 	public AmbienteNewDTO() {
 		
 	}

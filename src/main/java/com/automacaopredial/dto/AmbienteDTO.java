@@ -25,6 +25,9 @@ public class AmbienteDTO implements Serializable{
 	@NotNull(message="Preenchimento obrigatório")
 	private Integer dispositivoId;
 	
+	//@NotNull(message="Preenchimento obrigatório")
+	//private int quantidadePortasDig;
+	
 	public AmbienteDTO() {
 		
 	}
