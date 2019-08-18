@@ -2,6 +2,8 @@ package com.automacaopredial.resources;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -99,28 +101,38 @@ public class EquipamentoResource {
 		return ResponseEntity.ok().body(listDTO);
 	}
 	
-	@RequestMapping(value="/findTipo", method=RequestMethod.GET)
+	@RequestMapping(value="/{ambiente_id}/{equipamento_porta}/portas", method=RequestMethod.GET)
 	public ResponseEntity<List<Integer>> findPortas(
-			@RequestParam(value="ambiente", defaultValue="") String ambiente_id){
+			@PathVariable String ambiente_id,
+			@PathVariable String equipamento_porta){
+			//@RequestParam(value="ambiente", defaultValue="") String ambiente_id){
 	
-		Integer id = Integer.parseInt(ambiente_id); 
-		int qtdadePortas = service.findPortas(id);
+		Integer idAmbiente = Integer.parseInt(ambiente_id);
+		Integer portaEquipamento = Integer.parseInt(equipamento_porta);
+		int qtdadePortas = service.findPortas(idAmbiente);
 		ArrayList<Integer> listPortas = new ArrayList<>();
 		
-		for(int i=0; i<= qtdadePortas; i++) {
+		for(int i=2; i <= qtdadePortas; i++) {
 			listPortas.add(i);
 		}
 
-		List<Equipamento> listEquipamentos = service.search(id);
+		List<Equipamento> listEquipamentos = service.search(idAmbiente);
 		
 		for(int dispPorta=0; dispPorta < listPortas.size(); dispPorta++) {
-			for(int eqPorta=0; eqPorta < listEquipamentos.size(); eqPorta++) {
+			for(int eqPorta=0; eqPorta < listEquipamentos.size(); eqPorta++) {			
 				if(listPortas.get(dispPorta) == listEquipamentos.get(eqPorta).getPorta()) {
 					listPortas.remove(dispPorta);
 				}
+			}			
+		}
+		
+		for(int j=0; j < listEquipamentos.size(); j++) {
+			if(listEquipamentos.get(j).getPorta() == portaEquipamento && portaEquipamento != 0) {
+				listPortas.add(portaEquipamento );
 			}
 		}
-
+		
+		Collections.sort(listPortas);		
 	return ResponseEntity.ok().body(listPortas);
 	}
 }
