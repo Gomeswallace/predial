@@ -2,7 +2,6 @@ package com.automacaopredial.resources;
 
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,7 +54,7 @@ public class EquipamentoResource {
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value= "/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> Update(@Valid @RequestBody EquipamentoNewDTO objNewDTO, @PathVariable Integer id) {
+	public ResponseEntity<Void> Update(@Valid @RequestBody EquipamentoNewDTO objNewDTO, @PathVariable Integer id) throws Exception {
 		Equipamento obj = service.fromDTO(objNewDTO);
 		obj.setId(id);
 		obj = service.update(obj);
@@ -82,30 +81,20 @@ public class EquipamentoResource {
 	@RequestMapping(value="/page", method=RequestMethod.GET)
 	public ResponseEntity<List<EquipamentoDTO>> findPage(
 			//requestParam informa que o parametro é opcional
-			// @RequestParam(value="nome", defaultValue="") String nome,
 			 @RequestParam(value="ambiente", defaultValue="") String ambiente)
-			//@RequestParam(value="page", defaultValue="0")  Integer page, 
-			//@RequestParam(value="linesPerPage", defaultValue="4") Integer linesPerPage, 
-			//@RequestParam(value="orderBy", defaultValue="nome") String orderBy, 
-			//@RequestParam(value="direction", defaultValue="ASC") String direction)
 	{
-		//String nomeDecoded = URL.decodeParam(nome);
-		//List<Integer> ids = URL.decodeIntList(dispositivos);
+	
 		Integer id = Integer.parseInt(ambiente); 
 		List<Equipamento> list = service.search(id);
 		List<EquipamentoDTO> listDTO = list.stream().map(obj -> new EquipamentoDTO(obj)).collect(Collectors.toList());
 		
-		//Page<Equipamento> list = service.findPage(page, linesPerPage, orderBy, direction);
-		//lista de dto para o stream converter cada obj em dto pela funcao anonima e depois retornar essa lista
-		//Page<EquipamentoDTO> listDTO = list.map(obj -> new EquipamentoDTO(obj));
 		return ResponseEntity.ok().body(listDTO);
 	}
 	
 	@RequestMapping(value="/{ambiente_id}/{equipamento_porta}/portas", method=RequestMethod.GET)
 	public ResponseEntity<List<Integer>> findPortas(
 			@PathVariable String ambiente_id,
-			@PathVariable String equipamento_porta){
-			//@RequestParam(value="ambiente", defaultValue="") String ambiente_id){
+			@PathVariable String equipamento_porta){		
 	
 		Integer idAmbiente = Integer.parseInt(ambiente_id);
 		Integer portaEquipamento = Integer.parseInt(equipamento_porta);

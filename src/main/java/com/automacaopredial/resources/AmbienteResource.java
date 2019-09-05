@@ -68,20 +68,16 @@ public class AmbienteResource {
 	public ResponseEntity<List<AmbienteDTO>> findAll() {
 		List<Ambiente> list = service.findAll();
 		List<AmbienteDTO> listDTO = list.stream()
-									.map(obj -> new AmbienteDTO(obj)).collect(Collectors.toList());
+									.map(obj -> new AmbienteDTO(obj))
+									.collect(Collectors.toList());
 				
 		return ResponseEntity.ok().body(listDTO);
 	}
 	
 	@RequestMapping(value="/page", method=RequestMethod.GET)
 	public ResponseEntity<List<AmbienteDTO>> findPage(
-			 //@RequestParam(value="nome", defaultValue="") String nome,
-			 @RequestParam(value="dispositivo", defaultValue="") String dispositivo)
-			 //@RequestParam(value="page", defaultValue="0")  Integer page, 
-			 //@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
-			 //@RequestParam(value="orderBy", defaultValue="nome") String orderBy, 
-			 //@RequestParam(value="direction", defaultValue="ASC") String direction)
-			 {
+			 @RequestParam(value="dispositivo", defaultValue="") String dispositivo)			 
+	{
 		//String nomeDecoded = URL.decodeParam(nome);
 		Integer id = Integer.parseInt(dispositivo);
 		List<Ambiente> list = service.search(id);

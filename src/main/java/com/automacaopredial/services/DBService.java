@@ -55,19 +55,19 @@ public class DBService {
 		DispositivoTipo tipoDisp1 = new DispositivoTipo(null, "Arduino Due", 12, 54); 
 		DispositivoTipo tipoDisp2 = new DispositivoTipo(null, "Arduino Mega 2560", 16, 54);
 		
-		Dispositivo disp1 = new Dispositivo(null, "Dispositivo 1", "TESTE", tipoDisp1 );
-		Dispositivo disp2 = new Dispositivo(null, "Dispositivo 2", "TESTE 2", tipoDisp2);
+		Dispositivo disp1 = new Dispositivo(null, "Dispositivo Due", "1 Andar", tipoDisp1 );
+		Dispositivo disp2 = new Dispositivo(null, "Dispositivo Mega", "2 Andar", tipoDisp2);
 
-		Ambiente amb1 = new Ambiente(null, "Garagem", "Entrada 1", disp1);
-		Ambiente amb2 = new Ambiente(null, "DOIS", "Entrada 1", disp1);
-		Ambiente amb3 = new Ambiente(null, "TRES", "Entrada 1", disp1);
-		Ambiente amb4 = new Ambiente(null, "QUATRO", "Entrada 1", disp1);
-		Ambiente amb5 = new Ambiente(null, "CINCO", "Entrada 1", disp1);
-		Ambiente amb6 = new Ambiente(null, "SEIS", "Entrada 1", disp1);
-		Ambiente amb7 = new Ambiente(null, "SETE", "Entrada 1", disp1);
-		Ambiente amb8 = new Ambiente(null, "OITO", "Entrada 1", disp1);
-		Ambiente amb9 = new Ambiente(null, "NOVE", "Entrada 1", disp1);
-		Ambiente amb10 = new Ambiente(null, "DEZ", "Entrada 1", disp1);
+		Ambiente amb1 = new Ambiente(null, "Garagem", "Subsolo", disp1);
+		Ambiente amb2 = new Ambiente(null, "Area de serviço", "Lavanderia", disp1);
+		Ambiente amb3 = new Ambiente(null, "TRES", "Entrada 3", disp1);
+		Ambiente amb4 = new Ambiente(null, "QUATRO", "Entrada 4", disp1);
+		Ambiente amb5 = new Ambiente(null, "CINCO", "Entrada 5", disp1);
+		Ambiente amb6 = new Ambiente(null, "SEIS", "Entrada 6", disp1);
+		Ambiente amb7 = new Ambiente(null, "SETE", "Entrada 7", disp1);
+		Ambiente amb8 = new Ambiente(null, "OITO", "Entrada 8", disp1);
+		Ambiente amb9 = new Ambiente(null, "NOVE", "Entrada 9", disp1);
+		Ambiente amb10 = new Ambiente(null, "DEZ", "Entrada 10", disp1);
 		Ambiente amb11 = new Ambiente(null, "Area de serviço", "Lavanderia", disp2);
 		
 		disp1.getAmbientes().addAll(Arrays.asList(amb1, amb2, amb3, amb4, amb5, amb6, amb7, amb8, amb9, amb10));
@@ -79,11 +79,11 @@ public class DBService {
 		EquipamentoTipo eTipo4 = new EquipamentoTipo(null, "Radio");
 		EquipamentoTipo eTipo5 = new EquipamentoTipo(null, "Ventilador");
 		
-		Equipamento ep1 = new Equipamento(null,"Equipamento 1", 2, true, eTipo1, amb1);
+		Equipamento ep1 = new Equipamento(null,"Equipamento 1", 6, true, eTipo1, amb1);
 		Equipamento ep2 = new Equipamento(null,"Equipamento 2", 3, true, eTipo2, amb1);
 		Equipamento ep3 = new Equipamento(null, "Equipamento 3", 4, true, eTipo3, amb2);
 		Equipamento ep4 = new Equipamento(null,"Equipamento 4", 5, true, eTipo4, amb3);
-		Equipamento ep5 = new Equipamento(null,"Equipamento 5", 1, true, eTipo5, amb3);
+		Equipamento ep5 = new Equipamento(null,"Equipamento 5", 7, true, eTipo5, amb3);
 		
 		amb1.getEquipamentos().addAll(Arrays.asList(ep1, ep2));
 		amb2.getEquipamentos().addAll(Arrays.asList(ep3));

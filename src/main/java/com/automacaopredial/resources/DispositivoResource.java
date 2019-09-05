@@ -81,7 +81,7 @@ public class DispositivoResource {
 			 @RequestParam(value="direction", defaultValue="ASC") String direction){
 		Page<Dispositivo> list = service.findPage(page, linesPerPage, orderBy, direction);
 		//lista de dto para o stream converter cada obj em dto pela funcao anonima e depois retornar essa lista
-		//Page<DispositivoDTO> listDTO = list.map(obj -> new DispositivoDTO(obj));
+		
 		return ResponseEntity.ok().body(list);
 	}
 }

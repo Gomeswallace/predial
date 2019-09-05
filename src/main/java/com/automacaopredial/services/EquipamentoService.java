@@ -33,6 +33,9 @@ public class EquipamentoService {
 	
 	@Autowired
 	public EquipamentoTipoService equipamentoTipoService;
+	
+	@Autowired
+	public ArduinoService arduinoService;
 
 	public Equipamento find(Integer id) {
 		Optional<Equipamento> obj = repo.findById(id);
@@ -47,9 +50,15 @@ public class EquipamentoService {
 		return repo.save(obj);
 	}
 	
-	public Equipamento update(Equipamento obj) {
+	public Equipamento update(Equipamento obj) throws Exception {
 		Equipamento newObj = find(obj.getId()); //verifica se o obj existe antes de tentar atualizar
 		updateData(newObj, obj); //Criado o metodo para tratar quais os dados podem ser atualizados
+		
+		String porta = String.valueOf(newObj.getPorta());
+		String status = String.valueOf(newObj.isStatus());
+		
+		arduinoService.sendGet(porta, status);
+		
 		return repo.save(newObj);
 	}
 	

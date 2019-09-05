@@ -15,10 +15,9 @@ public class TestConfig {
 	
 	@Autowired
 	private DBService service;
-	
+
 	@Bean
 	public boolean instatiateDataBase() {
-		
 		service.instantiateTestDataBase();		
 		return true;
 	}
@@ -30,5 +29,5 @@ public class TestConfig {
 	public EmailService emailService() {
 		//MockEmailservice chama o servico que grava o e-mail no log
 		return new MockEmailService();
-	}	
+	}
 }

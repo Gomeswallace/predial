@@ -40,8 +40,7 @@ public class EquipamentoTipoResource {
 			 @RequestParam(value="orderBy", defaultValue="nome") String orderBy, 
 			 @RequestParam(value="direction", defaultValue="ASC") String direction){
 		Page<EquipamentoTipo> list = service.findPage(page, linesPerPage, orderBy, direction);
-		//lista de dto para o stream converter cada obj em dto pela funcao anonima e depois retornar essa lista
-		//Page<DispositivoDTO> listDTO = list.map(obj -> new DispositivoDTO(obj));
+		
 		return ResponseEntity.ok().body(list);
 	}
 }
