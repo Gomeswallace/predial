@@ -52,8 +52,12 @@ public class DBService {
 		Usuario user2 = new Usuario(null, "Maria", "maria@email.com", pe.encode("123"));
 		user1.addTipoUsuario(TipoUsuario.CLIENTE);
 	
-		DispositivoTipo tipoDisp1 = new DispositivoTipo(null, "Arduino Due", 12, 54); 
-		DispositivoTipo tipoDisp2 = new DispositivoTipo(null, "Arduino Mega 2560", 16, 54);
+		DispositivoTipo tipoDisp1 = new DispositivoTipo(null, "Arduino Due", 12, 54); 			
+		DispositivoTipo tipoDisp2 = new DispositivoTipo(null, "Arduino Lalypad", 6, 14);		
+		DispositivoTipo tipoDisp3 = new DispositivoTipo(null, "Arduino Leonado", 7, 20);
+		DispositivoTipo tipoDisp4 = new DispositivoTipo(null, "Arduino Mega 2560", 16, 54);
+		DispositivoTipo tipoDisp5 = new DispositivoTipo(null, "Arduino Nano", 8, 14);
+		DispositivoTipo tipoDisp6 = new DispositivoTipo(null, "Placa Uno R3", 6, 14);
 		
 		Dispositivo disp1 = new Dispositivo(null, "Dispositivo Due", "1 Andar", tipoDisp1 );
 		Dispositivo disp2 = new Dispositivo(null, "Dispositivo Mega", "2 Andar", tipoDisp2);
@@ -79,10 +83,10 @@ public class DBService {
 		EquipamentoTipo eTipo4 = new EquipamentoTipo(null, "Radio");
 		EquipamentoTipo eTipo5 = new EquipamentoTipo(null, "Ventilador");
 		
-		Equipamento ep1 = new Equipamento(null,"Equipamento 1", 6, true, eTipo1, amb1);
-		Equipamento ep2 = new Equipamento(null,"Equipamento 2", 3, true, eTipo2, amb1);
-		Equipamento ep3 = new Equipamento(null, "Equipamento 3", 4, true, eTipo3, amb2);
-		Equipamento ep4 = new Equipamento(null,"Equipamento 4", 5, true, eTipo4, amb3);
+		Equipamento ep1 = new Equipamento(null,"Equipamento 1", 3, true, eTipo1, amb1);
+		Equipamento ep2 = new Equipamento(null,"Equipamento 2", 4, true, eTipo2, amb1);
+		Equipamento ep3 = new Equipamento(null, "Equipamento 3", 5, true, eTipo3, amb2);
+		Equipamento ep4 = new Equipamento(null,"Equipamento 4", 6, true, eTipo4, amb3);
 		Equipamento ep5 = new Equipamento(null,"Equipamento 5", 7, true, eTipo5, amb3);
 		
 		amb1.getEquipamentos().addAll(Arrays.asList(ep1, ep2));
@@ -90,7 +94,7 @@ public class DBService {
 		amb3.getEquipamentos().addAll(Arrays.asList(ep4, ep5));
 		
 		usuarioRepository.saveAll(Arrays.asList(user1, user2));
-		dispositivoTipoRepository.saveAll(Arrays.asList(tipoDisp1, tipoDisp2));		
+		dispositivoTipoRepository.saveAll(Arrays.asList(tipoDisp1, tipoDisp2, tipoDisp3, tipoDisp4, tipoDisp5, tipoDisp6));		
 		dispositivoRepository.saveAll(Arrays.asList(disp1, disp2));
 		ambienteRepository.saveAll(Arrays.asList(amb1, amb2, amb3, amb4, amb5, amb6, amb7, amb8, amb9, amb10));
 		equipamentoTipoRepository.saveAll(Arrays.asList(eTipo1, eTipo2, eTipo3, eTipo4, eTipo5));

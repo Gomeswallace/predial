@@ -21,6 +21,7 @@ public class Dispositivo implements Serializable{
 	private Integer id;
 	private String nome;
 	private String descricao;
+	private int quantidadePortasDig;
 	
 	@ManyToOne
 	@JoinColumn(name = "dispositivoTipo_id")
@@ -38,6 +39,7 @@ public class Dispositivo implements Serializable{
 		this.nome = nome;
 		this.descricao = descricao;
 		this.tipo = tipo;
+		this.quantidadePortasDig = (tipo != null) ? tipo.getQuantidadePortasDig() : 0;
 	}
 
 	public Integer getId() {
@@ -78,6 +80,14 @@ public class Dispositivo implements Serializable{
 
 	public void setAmbientes(List<Ambiente> ambientes) {
 		this.ambientes = ambientes;
+	}
+	
+	public int getQuantidadePortasDig() {
+		return quantidadePortasDig;
+	}
+
+	public void setQuantidadePortasDig(int quantidadePortasDig) {
+		this.quantidadePortasDig = quantidadePortasDig;
 	}
 
 	@Override

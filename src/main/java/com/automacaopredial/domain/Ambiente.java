@@ -23,7 +23,6 @@ public class Ambiente implements Serializable{
 	private Integer id;
 	private String nome;
 	private String descricao;
-	private int quantidadePortasDig;
 
 	@OneToMany(mappedBy = "ambiente")
 	private List<Equipamento> equipamentos = new ArrayList<>();
@@ -41,8 +40,7 @@ public class Ambiente implements Serializable{
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
-		this.dispositivo = (disp != null) ? disp : null;
-		this.quantidadePortasDig = (disp != null) ? disp.getTipo().getQuantidadePortasDig() : 0;
+		this.dispositivo = (disp != null) ? disp : null;		
 	}
 
 	public Integer getId() {
@@ -83,14 +81,6 @@ public class Ambiente implements Serializable{
 
 	public void setDispositivo(Dispositivo dispositivo) {
 		this.dispositivo = dispositivo;
-	}
-	
-	public int getQuantidadePortasDig() {
-		return quantidadePortasDig;
-	}
-
-	public void setQuantidadePortasDig(int quantidadePortasDig) {
-		this.quantidadePortasDig = quantidadePortasDig;
 	}
 
 	@Override

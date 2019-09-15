@@ -59,7 +59,7 @@ public class Equipamento implements Serializable {
 		this.nome = nome;
 	}
 	
-	public boolean isStatus() {
+	public boolean getStatus() {
 		return status;
 	}
 

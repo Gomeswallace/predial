@@ -24,26 +24,12 @@ public class ArduinoService {
 			query = porta + "=" + status;
 			url = url + query;
 		}
-						
+		
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
-		// optional default is GET
 		con.setRequestMethod("GET");
-		
-		/*Add Parameters
-		//Map<String, String> parameters = new HashMap<>();
-		parameters.put("param1", "value");
-		parameters.put("param2", "value");
-		con.setDoOutput(true);
-		DataOutputStream out = new DataOutputStream(con.getOutputStream());
-		//out.writeBytes(ParametersStringBuilder.getParamsString(parameters));
-		out.flush();
-		out.close();
-		*/	
-		
-		//add request header
-		//con.setRequestProperty("User-Agent", USER_AGENT);
+
 		int responseCode = con.getResponseCode();
 		System.out.println("\nSending 'GET' request to URL : " + url);
 		System.out.println("Response Code : " + responseCode);

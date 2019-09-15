@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AutomacaopredialApplication {
 	
 	public static void main(String[] args) throws Exception {
-		SpringApplication.run(AutomacaopredialApplication.class, args);
-		
+		SpringApplication.run(AutomacaopredialApplication.class, args);		
 	}
 }

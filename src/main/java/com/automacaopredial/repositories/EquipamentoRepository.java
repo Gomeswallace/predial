@@ -14,11 +14,13 @@ import com.automacaopredial.domain.Equipamento;
 public interface EquipamentoRepository extends JpaRepository<Equipamento, Integer>{
 	
 	@Transactional(readOnly=true)
-	@Query("SELECT obj FROM Equipamento obj WHERE obj.ambiente.id = :ambienteId")
-	public List<Equipamento> search(@Param("ambienteId") Integer ambiente_id);
+	@Query("SELECT eq, am FROM Equipamento eq INNER JOIN eq.ambiente am"
+			+ " WHERE am.dispositivo.id = :dispositivoId")
+	public List<Equipamento> search(@Param("dispositivoId") Integer dispositivo_id);
 	//public List<Equipamento> findDistinctByNomeContainingAndAmbinete_IdIn(Integer id);
-	
 
+	//SELECT c1, c2 FROM Country c1 INNER JOIN c1.neighbors c2
+	
 	@Transactional(readOnly=true)
 	@Query("SELECT obj "
 			+ "FROM Equipamento obj "

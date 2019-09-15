@@ -40,7 +40,7 @@ public class EquipamentoDTO implements Serializable{
 		id = obj.getId();
 		nome = obj.getNome();
 		porta = obj.getPorta();
-		status = obj.isStatus();
+		status = obj.getStatus();
 		tipo = obj.getTipo();
 		ambiente = obj.getAmbiente();
 	}

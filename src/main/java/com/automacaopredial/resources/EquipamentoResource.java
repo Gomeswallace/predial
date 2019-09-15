@@ -91,21 +91,21 @@ public class EquipamentoResource {
 		return ResponseEntity.ok().body(listDTO);
 	}
 	
-	@RequestMapping(value="/{ambiente_id}/{equipamento_porta}/portas", method=RequestMethod.GET)
+	@RequestMapping(value="/{dispositivo_id}/{equipamento_porta}/portas", method=RequestMethod.GET)
 	public ResponseEntity<List<Integer>> findPortas(
-			@PathVariable String ambiente_id,
+			@PathVariable String dispositivo_id,
 			@PathVariable String equipamento_porta){		
 	
-		Integer idAmbiente = Integer.parseInt(ambiente_id);
+		Integer dispositivoId = Integer.parseInt(dispositivo_id);
 		Integer portaEquipamento = Integer.parseInt(equipamento_porta);
-		int qtdadePortas = service.findPortas(idAmbiente);
+		int qtdadePortas = service.findPortas(dispositivoId);
 		ArrayList<Integer> listPortas = new ArrayList<>();
 		
-		for(int i=2; i <= qtdadePortas; i++) {
+		for(int i=3; i <= qtdadePortas; i++) {
 			listPortas.add(i);
 		}
-
-		List<Equipamento> listEquipamentos = service.search(idAmbiente);
+		//TODO
+		List<Equipamento> listEquipamentos = service.search(dispositivoId);
 		
 		for(int dispPorta=0; dispPorta < listPortas.size(); dispPorta++) {
 			for(int eqPorta=0; eqPorta < listEquipamentos.size(); eqPorta++) {			

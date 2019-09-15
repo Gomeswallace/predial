@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.automacaopredial.domain.Ambiente;
+import com.automacaopredial.domain.Dispositivo;
 import com.automacaopredial.domain.Equipamento;
 import com.automacaopredial.dto.EquipamentoDTO;
 import com.automacaopredial.dto.EquipamentoNewDTO;
@@ -36,6 +37,9 @@ public class EquipamentoService {
 	
 	@Autowired
 	public ArduinoService arduinoService;
+	
+	@Autowired
+	public DispositivoService dispositivoService;
 
 	public Equipamento find(Integer id) {
 		Optional<Equipamento> obj = repo.findById(id);
@@ -55,7 +59,7 @@ public class EquipamentoService {
 		updateData(newObj, obj); //Criado o metodo para tratar quais os dados podem ser atualizados
 		
 		String porta = String.valueOf(newObj.getPorta());
-		String status = String.valueOf(newObj.isStatus());
+		String status = String.valueOf(newObj.getStatus());
 		
 		arduinoService.sendGet(porta, status);
 		
@@ -86,8 +90,8 @@ public class EquipamentoService {
 	}
 	
 	public Integer findPortas(Integer id) {
-		Ambiente ambiente = ambienteService.find(id);
-		Integer qtdadePortas = ambiente.getQuantidadePortasDig();
+		Dispositivo dispositivo = dispositivoService.find(id);
+		Integer qtdadePortas = dispositivo.getTipo().getQuantidadePortasDig();
 		
 		return qtdadePortas;	
 	}
@@ -115,7 +119,7 @@ public class EquipamentoService {
 	private void updateData(Equipamento newObj, Equipamento obj) {
 		newObj.setNome(obj.getNome());
 		newObj.setPorta(obj.getPorta());
-		newObj.setStatus(obj.isStatus());
+		newObj.setStatus(obj.getStatus());
 		newObj.setTipo(obj.getTipo());
 	}
 }
