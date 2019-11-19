@@ -22,6 +22,9 @@ public class DispositivoDTO implements Serializable {
 	private String descricao;
 	
 	@NotEmpty(message="Preenchimento obrigatório.")
+	private String ip;
+	
+	@NotEmpty(message="Preenchimento obrigatório.")
 	private DispositivoTipo dispositivoTipo;
 	
 	public DispositivoDTO() {
@@ -32,6 +35,7 @@ public class DispositivoDTO implements Serializable {
 		id = obj.getId();
 		nome = obj.getNome();
 		descricao = obj.getDescricao();
+		ip = obj.getIP();
 		dispositivoTipo = obj.getTipo();
 	}
 
@@ -57,6 +61,14 @@ public class DispositivoDTO implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	
+	public String getIP() {
+		return ip;
+	}
+	
+	public void setId(String ip) {
+		this.ip = ip;
 	}
 
 	public DispositivoTipo getDispositivoTipo() {

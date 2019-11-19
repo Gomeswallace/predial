@@ -96,15 +96,14 @@ public class EquipamentoResource {
 			@PathVariable String dispositivo_id,
 			@PathVariable String equipamento_porta){		
 	
-		Integer dispositivoId = Integer.parseInt(dispositivo_id);
-		Integer portaEquipamento = Integer.parseInt(equipamento_porta);
+		Integer dispositivoId = Integer.parseInt(dispositivo_id);		
 		int qtdadePortas = service.findPortas(dispositivoId);
 		ArrayList<Integer> listPortas = new ArrayList<>();
 		
 		for(int i=3; i <= qtdadePortas; i++) {
 			listPortas.add(i);
 		}
-		//TODO
+		
 		List<Equipamento> listEquipamentos = service.search(dispositivoId);
 		
 		for(int dispPorta=0; dispPorta < listPortas.size(); dispPorta++) {
@@ -115,9 +114,12 @@ public class EquipamentoResource {
 			}			
 		}
 		
+		//TODO
+		Integer portaEquipamento = Integer.parseInt(equipamento_porta);
+		
 		for(int j=0; j < listEquipamentos.size(); j++) {
-			if(listEquipamentos.get(j).getPorta() == portaEquipamento && portaEquipamento != 0) {
-				listPortas.add(portaEquipamento );
+			if(listEquipamentos.get(j).getPorta() == portaEquipamento) {
+				listPortas.add(portaEquipamento);
 			}
 		}
 		

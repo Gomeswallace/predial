@@ -19,6 +19,9 @@ public class DispositivoNewDTO implements Serializable {
 	@Length(min=5, max=120, message="O tamanho deve ser entre 5 e 120 caracteres")
 	private String descricao;
 	
+	@NotEmpty(message="Preenchimento obrigatório")
+	private String ip;
+	
 	@NotNull()
 	private Integer idTipo;
 
@@ -48,6 +51,14 @@ public class DispositivoNewDTO implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	
+	public String getIP() {
+		return ip;
+	}
+
+	public void setId(String ip) {
+		this.ip = ip;
 	}
 
 	public Integer getIdTipo() {

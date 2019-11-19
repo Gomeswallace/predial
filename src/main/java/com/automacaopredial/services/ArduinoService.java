@@ -8,6 +8,8 @@ import java.net.URL;
 
 import org.springframework.stereotype.Service;
 
+import com.automacaopredial.domain.Equipamento;
+
 @Service
 public class ArduinoService {
 	
@@ -15,18 +17,25 @@ public class ArduinoService {
 		super();
 	}
 	
-	public void sendGet(String porta, String status) throws IOException {
-
-		//String url = "http://www.google.com/search?q=mkyong";
-		String url = "http://192.168.1.168?";//?L=1&M=1&N=0";
-		String query;
-		if(!porta.isEmpty() && !status.isEmpty()) {
-			query = porta + "=" + status;
-			url = url + query;
+	public void sendGet(Equipamento obj) throws IOException {
+		
+		String ip = String.valueOf(obj.getAmbiente().getDispositivo().getIP());
+		String porta = new String();
+		String status = new String();
+		if(obj.getPorta() != 0 && !obj.getStatus()) {
+			porta = String.valueOf(obj.getPorta());
+			status = String.valueOf(obj.getStatus());
 		}
 		
-		URL obj = new URL(url);
-		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+		//String url = "http://www.google.com/search?q=mkyong";
+		String url = "http://" + ip + "?";//?L=1&M=1&N=0";
+		String query;
+	
+		query = porta + "=" + status;
+		url = url + query;
+		
+		URL conexao = new URL(url);
+		HttpURLConnection con = (HttpURLConnection) conexao.openConnection();
 
 		con.setRequestMethod("GET");
 

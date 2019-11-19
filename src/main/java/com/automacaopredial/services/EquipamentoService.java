@@ -58,10 +58,10 @@ public class EquipamentoService {
 		Equipamento newObj = find(obj.getId()); //verifica se o obj existe antes de tentar atualizar
 		updateData(newObj, obj); //Criado o metodo para tratar quais os dados podem ser atualizados
 		
-		String porta = String.valueOf(newObj.getPorta());
-		String status = String.valueOf(newObj.getStatus());
+//		String porta = String.valueOf(newObj.getPorta());
+//		String status = String.valueOf(newObj.getStatus());
 		
-		arduinoService.sendGet(porta, status);
+		arduinoService.sendGet(newObj);
 		
 		return repo.save(newObj);
 	}

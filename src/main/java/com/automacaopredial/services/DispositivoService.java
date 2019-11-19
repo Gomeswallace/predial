@@ -80,6 +80,7 @@ public class DispositivoService {
 			return new Dispositivo(objDTO.getId(),
 								   objDTO.getNome(),
 								   objDTO.getDescricao(),
+								   objDTO.getIP(),
 								   null);
 	}
 	
@@ -87,6 +88,7 @@ public class DispositivoService {
 		Dispositivo disp = new Dispositivo(null, 
 										   objnewDTO.getNome(), 
 										   objnewDTO.getDescricao(), 
+										   objnewDTO.getIP(),
 										   dispositivoTipoService.toTipo(objnewDTO.getIdTipo()));
 		return disp;
 	}	

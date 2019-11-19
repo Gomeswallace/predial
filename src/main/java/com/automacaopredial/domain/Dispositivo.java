@@ -22,6 +22,7 @@ public class Dispositivo implements Serializable{
 	private String nome;
 	private String descricao;
 	private int quantidadePortasDig;
+	private String ip;
 	
 	@ManyToOne
 	@JoinColumn(name = "dispositivoTipo_id")
@@ -33,12 +34,13 @@ public class Dispositivo implements Serializable{
 	public Dispositivo() {		
 	}
 	
-	public Dispositivo(Integer id, String nome, String descricao, DispositivoTipo tipo) {
+	public Dispositivo(Integer id, String nome, String descricao, String ip, DispositivoTipo tipo) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.tipo = tipo;
+		this.ip = ip;
 		this.quantidadePortasDig = (tipo != null) ? tipo.getQuantidadePortasDig() : 0;
 	}
 
@@ -80,6 +82,14 @@ public class Dispositivo implements Serializable{
 
 	public void setAmbientes(List<Ambiente> ambientes) {
 		this.ambientes = ambientes;
+	}
+	
+	public String getIP() {
+		return ip;
+	}
+
+	public void setIP(String ip) {
+		this.ip = ip;
 	}
 	
 	public int getQuantidadePortasDig() {

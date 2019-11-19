@@ -59,8 +59,8 @@ public class DBService {
 		DispositivoTipo tipoDisp5 = new DispositivoTipo(null, "Arduino Nano", 8, 14);
 		DispositivoTipo tipoDisp6 = new DispositivoTipo(null, "Placa Uno R3", 6, 14);
 		
-		Dispositivo disp1 = new Dispositivo(null, "Dispositivo Due", "1 Andar", tipoDisp1 );
-		Dispositivo disp2 = new Dispositivo(null, "Dispositivo Mega", "2 Andar", tipoDisp2);
+		Dispositivo disp1 = new Dispositivo(null, "Dispositivo Due", "1 Andar", "192.168.1.168", tipoDisp1 );
+		Dispositivo disp2 = new Dispositivo(null, "Dispositivo Mega", "2 Andar", "192.168.1.167", tipoDisp2);
 
 		Ambiente amb1 = new Ambiente(null, "Garagem", "Subsolo", disp1);
 		Ambiente amb2 = new Ambiente(null, "Area de serviço", "Lavanderia", disp1);
